@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4B54966A1993A60700B5145E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B911D14198D83A7002324C9 /* libxml2.dylib */; };
 		4B5F7CAB19A1D77800C6F23C /* SearchDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5F7CAA19A1D77800C6F23C /* SearchDisplay.m */; };
-		4B911D9419927E2A002324C9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B911D9319927E2A002324C9 /* Parse.framework */; };
 		4B911E1C1993898A002324C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE34E6E197C73BD00587A1A /* main.m */; };
 		4B911E3A19938A74002324C9 /* LPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91B11C19852E6D0012D237 /* LPTableViewController.m */; };
 		4B911E3C19938A74002324C9 /* LPLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91B11919852A6A0012D237 /* LPLibraryTableViewController.m */; };
@@ -25,14 +24,9 @@
 		4B911F13199390A8002324C9 /* vhugo.epub in Resources */ = {isa = PBXBuildFile; fileRef = 4B911F0E199390A8002324C9 /* vhugo.epub */; };
 		4B911F14199390A8002324C9 /* yellowslide.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B911F0F199390A8002324C9 /* yellowslide.png */; };
 		4BA87DAC19B8594500A33DB7 /* GoogleOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA87DAB19B8594500A33DB7 /* GoogleOAuth.m */; };
-		4BA87DAF19BE94CF00A33DB7 /* 16076.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BA87DAD19BE94CE00A33DB7 /* 16076.png */; };
-		4BA87DB419BE96DE00A33DB7 /* 47536.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BA87DB219BE96DE00A33DB7 /* 47536.png */; };
-		4BA87DB619BE978000A33DB7 /* 1502.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BA87DB519BE978000A33DB7 /* 1502.png */; };
-		4BA87DB819BE9A0C00A33DB7 /* 43455.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BA87DB719BE9A0C00A33DB7 /* 43455.png */; };
 		4BA9C42D19C831FA002E2CCA /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9C42C19C831FA002E2CCA /* PopOverView.m */; };
 		4BA9C43019C8326F002E2CCA /* ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9C42F19C8326F002E2CCA /* ArrowView.m */; };
 		4BA9C43319C832D2002E2CCA /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA9C43219C832D2002E2CCA /* PopoverViewController.m */; };
-		4BB0A93F19B48514007923F1 /* kipling-jungle-book.epub in Resources */ = {isa = PBXBuildFile; fileRef = 4BB0A93E19B48514007923F1 /* kipling-jungle-book.epub */; };
 		4BBFD1CF19B589CA00534A65 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD1C919B589CA00534A65 /* Chapter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BBFD1D019B589CA00534A65 /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD1CB19B589CA00534A65 /* ChapterListViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BBFD1D119B589CA00534A65 /* ChapterListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BBFD1CC19B589CA00534A65 /* ChapterListViewController.xib */; };
@@ -64,6 +58,7 @@
 		4BBFD21E19B58A2800534A65 /* CXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD21419B58A2800534A65 /* CXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BBFD22619B5A68300534A65 /* ReadZen_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BBFD22519B5A68300534A65 /* ReadZen_Logo.png */; };
 		4BC2E72919A89E9B008DE2EF /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4BC2E72819A89E9B008DE2EF /* logo.jpg */; };
+		4BC4965819F51FA2008F0023 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC4965719F51FA2008F0023 /* Parse.framework */; };
 		4BE34E61197C73BD00587A1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34E60197C73BD00587A1A /* Foundation.framework */; };
 		4BE34E63197C73BD00587A1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34E62197C73BD00587A1A /* CoreGraphics.framework */; };
 		4BE34E65197C73BD00587A1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34E64197C73BD00587A1A /* UIKit.framework */; };
@@ -121,7 +116,6 @@
 		4B911D6C19927D6C002324C9 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "../../../../../Downloads/AFNetworking-2.3.1/UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		4B911D6D19927D6C002324C9 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "../../../../../Downloads/AFNetworking-2.3.1/UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		4B911D6E19927D6C002324C9 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "../../../../../Downloads/AFNetworking-2.3.1/UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		4B911D9319927E2A002324C9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Downloads/Parse.framework; sourceTree = "<group>"; };
 		4B911EA419938E4D002324C9 /* EPubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPubView.xib; sourceTree = "<group>"; };
 		4B911F0B199390A8002324C9 /* orangeslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangeslide.png; path = ../orangeslide.png; sourceTree = "<group>"; };
 		4B911F0C199390A8002324C9 /* SearchWebView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = SearchWebView.js; path = ../SearchWebView.js; sourceTree = "<group>"; };
@@ -209,6 +203,7 @@
 		4BBFD22519B5A68300534A65 /* ReadZen_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReadZen_Logo.png; sourceTree = "<group>"; };
 		4BBFD22719B6058C00534A65 /* LearningPlatform2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LearningPlatform2.xcodeproj; sourceTree = SOURCE_ROOT; };
 		4BC2E72819A89E9B008DE2EF /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
+		4BC4965719F51FA2008F0023 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4BE34E5D197C73BD00587A1A /* LearningPlatform2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningPlatform2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BE34E60197C73BD00587A1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4BE34E62197C73BD00587A1A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -255,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC4965819F51FA2008F0023 /* Parse.framework in Frameworks */,
 				4B54966A1993A60700B5145E /* libxml2.dylib in Frameworks */,
 				4BE34EF2198015D800587A1A /* SystemConfiguration.framework in Frameworks */,
 				4BE34EF0198015D100587A1A /* StoreKit.framework in Frameworks */,
@@ -266,7 +262,6 @@
 				4BE34E63197C73BD00587A1A /* CoreGraphics.framework in Frameworks */,
 				4BE34EE21980156500587A1A /* CFNetwork.framework in Frameworks */,
 				4BE34EE01980155F00587A1A /* AudioToolbox.framework in Frameworks */,
-				4B911D9419927E2A002324C9 /* Parse.framework in Frameworks */,
 				4BE34E67197C73BD00587A1A /* CoreData.framework in Frameworks */,
 				4BE34E65197C73BD00587A1A /* UIKit.framework in Frameworks */,
 				4BE34E61197C73BD00587A1A /* Foundation.framework in Frameworks */,
@@ -492,7 +487,6 @@
 				4BA9C43119C832D2002E2CCA /* PopoverViewController.h */,
 				4BA9C43219C832D2002E2CCA /* PopoverViewController.m */,
 				4BA9C42919C7C928002E2CCA /* Icons */,
-				4B911D9319927E2A002324C9 /* Parse.framework */,
 				4BE34E68197C73BD00587A1A /* LearningPlatform2 */,
 				4BE34E85197C73BD00587A1A /* LearningPlatform2Tests */,
 				4BE34E5F197C73BD00587A1A /* Frameworks */,
@@ -512,6 +506,7 @@
 		4BE34E5F197C73BD00587A1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BC4965719F51FA2008F0023 /* Parse.framework */,
 				4B911D14198D83A7002324C9 /* libxml2.dylib */,
 				4BE34EF1198015D800587A1A /* SystemConfiguration.framework */,
 				4BE34EEF198015D100587A1A /* StoreKit.framework */,
@@ -691,12 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BA87DB819BE9A0C00A33DB7 /* 43455.png in Resources */,
-				4BA87DB619BE978000A33DB7 /* 1502.png in Resources */,
-				4BA87DB419BE96DE00A33DB7 /* 47536.png in Resources */,
-				4BA87DAF19BE94CF00A33DB7 /* 16076.png in Resources */,
 				4BBFD1D119B589CA00534A65 /* ChapterListViewController.xib in Resources */,
-				4BB0A93F19B48514007923F1 /* kipling-jungle-book.epub in Resources */,
 				4B911F10199390A8002324C9 /* orangeslide.png in Resources */,
 				4BBFD22619B5A68300534A65 /* ReadZen_Logo.png in Resources */,
 				4B911F11199390A8002324C9 /* SearchWebView.js in Resources */,
