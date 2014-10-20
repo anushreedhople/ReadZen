@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="BookInfo" syncable="YES">
+        <attribute name="bookid1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bookid2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bookid3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bookid4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bookid5" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="studentdetails" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StudentInfo" inverseName="bookdetails" inverseEntity="StudentInfo" syncable="YES"/>
+    </entity>
+    <entity name="StudentInfo" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grade" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bookdetails" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BookInfo" inverseName="studentdetails" inverseEntity="BookInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="StudentInfo" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="BookInfo" positionX="-54" positionY="27" width="128" height="133"/>
+    </elements>
+</model>
