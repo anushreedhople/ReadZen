@@ -20,6 +20,7 @@
 	NSString* text;
     id <ChapterDelegate> delegate;
     int pageCount;
+    int locationPageCount;
     int chapterIndex;
     CGRect windowSize;
     int fontPercentSize;

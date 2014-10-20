@@ -477,7 +477,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4BE34E54197C73BC00587A1A = {
+		4BC4965C19F5287D008F0023 /* PopOver */ = {
 			isa = PBXGroup;
 			children = (
 				4BA9C42B19C831F9002E2CCA /* PopOverView.h */,
@@ -486,6 +486,14 @@
 				4BA9C42F19C8326F002E2CCA /* ArrowView.m */,
 				4BA9C43119C832D2002E2CCA /* PopoverViewController.h */,
 				4BA9C43219C832D2002E2CCA /* PopoverViewController.m */,
+			);
+			name = PopOver;
+			sourceTree = "<group>";
+		};
+		4BE34E54197C73BC00587A1A = {
+			isa = PBXGroup;
+			children = (
+				4BC4965C19F5287D008F0023 /* PopOver */,
 				4BA9C42919C7C928002E2CCA /* Icons */,
 				4BE34E68197C73BD00587A1A /* LearningPlatform2 */,
 				4BE34E85197C73BD00587A1A /* LearningPlatform2Tests */,
