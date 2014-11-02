@@ -47,7 +47,7 @@ int buttonid=0;
     if([self connectedToInternet]) {
         NSLog(@"Internet connection exists");
         UIStoryboard *storyboard = self.storyboard;
-        LPLibraryViewController *libTableView = [storyboard instantiateViewControllerWithIdentifier:@"LibraryTableViewController"];
+        LPLibraryViewController *libTableView = [storyboard instantiateViewControllerWithIdentifier:@"CentralLibrary"];
         [self.navigationController pushViewController:libTableView animated:YES];
     }
     else {
@@ -226,9 +226,9 @@ int buttonid=0;
     }
     
     /*Set the tag of the book*/
-    [epubViewController setBookIndex:i];
+    //[epubViewController setBookIndex:i];
     /*Set the weblink book source for copyright reasons*/
-    [epubViewController loadBookSource:weblink];
+    //[epubViewController loadBookSource:weblink];
     /*Open the book in Web View*/
     [epubViewController loadEpub:[NSURL fileURLWithPath:filePath]];
     

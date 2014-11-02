@@ -35,6 +35,7 @@
 	int pagesInCurrentSpineCount;
 	int currentTextSize;
 	int totalPagesCount;
+    int actualPagesCount;
     
     BOOL epubLoaded;
     BOOL paginating;

@@ -27,7 +27,7 @@
 }
 
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, readonly) int pageCount, chapterIndex, fontPercentSize;
+@property (nonatomic, readonly) int pageCount, locationPageCount, chapterIndex, fontPercentSize;
 @property (nonatomic, readonly) NSString *spinePath, *title, *text;
 @property (nonatomic, readonly) CGRect windowSize;
 

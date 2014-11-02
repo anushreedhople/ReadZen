@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B1C42B41A063E9B00C51DDA /* LPCLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1C42B31A063E9B00C51DDA /* LPCLibraryTableViewController.m */; };
+		4B1C42BA1A063EC500C51DDA /* SearchDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1C42B91A063EC500C51DDA /* SearchDisplay.m */; };
+		4B1C42BD1A06403F00C51DDA /* LPTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1C42BC1A06403F00C51DDA /* LPTableCell.m */; };
 		4B54966A1993A60700B5145E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B911D14198D83A7002324C9 /* libxml2.dylib */; };
-		4B5F7CAB19A1D77800C6F23C /* SearchDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5F7CAA19A1D77800C6F23C /* SearchDisplay.m */; };
 		4B911E1C1993898A002324C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE34E6E197C73BD00587A1A /* main.m */; };
-		4B911E3A19938A74002324C9 /* LPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91B11C19852E6D0012D237 /* LPTableViewController.m */; };
-		4B911E3C19938A74002324C9 /* LPLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91B11919852A6A0012D237 /* LPLibraryTableViewController.m */; };
-		4B911E3E19938A74002324C9 /* LPBookDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91B11F198618060012D237 /* LPBookDetailsViewController.m */; };
 		4B911E4019938A74002324C9 /* LPLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE34EA0197E57E800587A1A /* LPLibraryViewController.m */; };
 		4B911E4219938A74002324C9 /* LPRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE34EF61981126F00587A1A /* LPRegisterViewController.m */; };
 		4B911E4419938A74002324C9 /* LPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE34E72197C73BD00587A1A /* LPAppDelegate.m */; };
@@ -81,7 +80,6 @@
 		4BE34EEE198015C900587A1A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34EED198015C900587A1A /* Security.framework */; };
 		4BE34EF0198015D100587A1A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34EEF198015D100587A1A /* StoreKit.framework */; };
 		4BE34EF2198015D800587A1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE34EF1198015D800587A1A /* SystemConfiguration.framework */; };
-		4BF52CCC19EB9D91007CC9FC /* LPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF52CCB19EB9D91007CC9FC /* LPTableViewCell.m */; };
 		4BF52CCF19EBB9EA007CC9FC /* ReadingMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF52CCE19EBB9EA007CC9FC /* ReadingMetric.m */; };
 /* End PBXBuildFile section */
 
@@ -96,8 +94,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4B5F7CA919A1D77800C6F23C /* SearchDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDisplay.h; sourceTree = "<group>"; };
-		4B5F7CAA19A1D77800C6F23C /* SearchDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDisplay.m; sourceTree = "<group>"; };
+		4B1C42B21A063E7A00C51DDA /* LPCLibraryTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPCLibraryTableViewController.h; sourceTree = "<group>"; };
+		4B1C42B31A063E9B00C51DDA /* LPCLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCLibraryTableViewController.m; sourceTree = "<group>"; };
+		4B1C42B81A063EC500C51DDA /* SearchDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDisplay.h; sourceTree = "<group>"; };
+		4B1C42B91A063EC500C51DDA /* SearchDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDisplay.m; sourceTree = "<group>"; };
+		4B1C42BB1A06403F00C51DDA /* LPTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTableCell.h; sourceTree = "<group>"; };
+		4B1C42BC1A06403F00C51DDA /* LPTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTableCell.m; sourceTree = "<group>"; };
 		4B911D14198D83A7002324C9 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		4B911D5E19927D6C002324C9 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "../../../../../Downloads/AFNetworking-2.3.1/UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
 		4B911D5F19927D6C002324C9 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "../../../../../Downloads/AFNetworking-2.3.1/UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
@@ -122,12 +124,6 @@
 		4B911F0D199390A8002324C9 /* slider_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider_ball.png; path = ../slider_ball.png; sourceTree = "<group>"; };
 		4B911F0E199390A8002324C9 /* vhugo.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = vhugo.epub; path = ../vhugo.epub; sourceTree = "<group>"; };
 		4B911F0F199390A8002324C9 /* yellowslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowslide.png; path = ../yellowslide.png; sourceTree = "<group>"; };
-		4B91B11819852A6A0012D237 /* LPLibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPLibraryTableViewController.h; path = ../LPLibraryTableViewController.h; sourceTree = "<group>"; };
-		4B91B11919852A6A0012D237 /* LPLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPLibraryTableViewController.m; path = ../LPLibraryTableViewController.m; sourceTree = "<group>"; };
-		4B91B11B19852E6D0012D237 /* LPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTableViewController.h; sourceTree = "<group>"; };
-		4B91B11C19852E6D0012D237 /* LPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTableViewController.m; sourceTree = "<group>"; };
-		4B91B11E198618060012D237 /* LPBookDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBookDetailsViewController.h; sourceTree = "<group>"; };
-		4B91B11F198618060012D237 /* LPBookDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBookDetailsViewController.m; sourceTree = "<group>"; };
 		4BA87DAA19B8594500A33DB7 /* GoogleOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleOAuth.h; path = ../GoogleOAuth.h; sourceTree = "<group>"; };
 		4BA87DAB19B8594500A33DB7 /* GoogleOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleOAuth.m; path = ../GoogleOAuth.m; sourceTree = "<group>"; };
 		4BA87DAD19BE94CE00A33DB7 /* 16076.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16076.png; sourceTree = "<group>"; };
@@ -239,8 +235,6 @@
 		4BE34EF1198015D800587A1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4BE34EF51981126F00587A1A /* LPRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPRegisterViewController.h; sourceTree = "<group>"; };
 		4BE34EF61981126F00587A1A /* LPRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRegisterViewController.m; sourceTree = "<group>"; };
-		4BF52CCA19EB9D91007CC9FC /* LPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTableViewCell.h; sourceTree = "<group>"; };
-		4BF52CCB19EB9D91007CC9FC /* LPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTableViewCell.m; sourceTree = "<group>"; };
 		4BF52CCD19EBB9EA007CC9FC /* ReadingMetric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingMetric.h; sourceTree = "<group>"; };
 		4BF52CCE19EBB9EA007CC9FC /* ReadingMetric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingMetric.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,6 +301,7 @@
 				4BBFD1D619B589D400534A65 /* GTMNSString+HTML.h */,
 				4BBFD1D719B589D400534A65 /* GTMNSString+HTML.m */,
 				4BBFD1C819B589CA00534A65 /* Chapter.h */,
+				4BBFD1C919B589CA00534A65 /* Chapter.m */,
 				4BBFD1DA19B589E100534A65 /* NSString+HTML.h */,
 				4BBFD1DB19B589E100534A65 /* NSString+HTML.m */,
 				4BBFD1DC19B589E100534A65 /* SearchResult.h */,
@@ -316,7 +311,6 @@
 				4BBFD1E019B589E100534A65 /* SearchResultsViewController.xib */,
 				4BBFD1E119B589E100534A65 /* UIWebView+SearchWebView.h */,
 				4BBFD1E219B589E100534A65 /* UIWebView+SearchWebView.m */,
-				4BBFD1C919B589CA00534A65 /* Chapter.m */,
 				4BBFD1CA19B589CA00534A65 /* ChapterListViewController.h */,
 				4BBFD1CB19B589CA00534A65 /* ChapterListViewController.m */,
 				4BBFD1CC19B589CA00534A65 /* ChapterListViewController.xib */,
@@ -447,14 +441,10 @@
 		4B91B12519864AE10012D237 /* E-Library */ = {
 			isa = PBXGroup;
 			children = (
-				4B91B11C19852E6D0012D237 /* LPTableViewController.m */,
-				4B91B11B19852E6D0012D237 /* LPTableViewController.h */,
-				4B91B11919852A6A0012D237 /* LPLibraryTableViewController.m */,
-				4B91B11819852A6A0012D237 /* LPLibraryTableViewController.h */,
-				4B91B11F198618060012D237 /* LPBookDetailsViewController.m */,
-				4B91B11E198618060012D237 /* LPBookDetailsViewController.h */,
-				4BF52CCA19EB9D91007CC9FC /* LPTableViewCell.h */,
-				4BF52CCB19EB9D91007CC9FC /* LPTableViewCell.m */,
+				4B1C42BB1A06403F00C51DDA /* LPTableCell.h */,
+				4B1C42BC1A06403F00C51DDA /* LPTableCell.m */,
+				4B1C42B31A063E9B00C51DDA /* LPCLibraryTableViewController.m */,
+				4B1C42B21A063E7A00C51DDA /* LPCLibraryTableViewController.h */,
 			);
 			name = "E-Library";
 			sourceTree = "<group>";
@@ -538,6 +528,8 @@
 		4BE34E68197C73BD00587A1A /* LearningPlatform2 */ = {
 			isa = PBXGroup;
 			children = (
+				4B1C42B81A063EC500C51DDA /* SearchDisplay.h */,
+				4B1C42B91A063EC500C51DDA /* SearchDisplay.m */,
 				4B54966C1993AB0E00B5145E /* Resources */,
 				4B911E9C19938E35002324C9 /* epubReader */,
 				4B91B12519864AE10012D237 /* E-Library */,
@@ -546,8 +538,6 @@
 				4B91B12119864A720012D237 /* Delegate+Controller */,
 				4BE34EC5197F127F00587A1A /* UIKit+AFNetworking */,
 				4BE34E97197C751B00587A1A /* Main.storyboard */,
-				4B5F7CA919A1D77800C6F23C /* SearchDisplay.h */,
-				4B5F7CAA19A1D77800C6F23C /* SearchDisplay.m */,
 				4BE34E77197C73BD00587A1A /* Images.xcassets */,
 				4BE34E74197C73BD00587A1A /* LearningPlatform2.xcdatamodeld */,
 				4BE34E69197C73BD00587A1A /* Supporting Files */,
@@ -742,24 +732,22 @@
 				4BBFD1E719B589E100534A65 /* UIWebView+SearchWebView.m in Sources */,
 				4BBFD1FD19B58A1100534A65 /* CXMLNode_CreationExtensions.m in Sources */,
 				4BBFD21E19B58A2800534A65 /* CXMLNode.m in Sources */,
+				4B1C42BD1A06403F00C51DDA /* LPTableCell.m in Sources */,
 				4BBFD1F419B589FD00534A65 /* ioapi.c in Sources */,
 				4BBFD1E519B589E100534A65 /* SearchResultsViewController.m in Sources */,
 				4BBFD1E319B589E100534A65 /* NSString+HTML.m in Sources */,
 				4BBFD21819B58A2800534A65 /* CXMLElement_CreationExtensions.m in Sources */,
 				4BBFD21D19B58A2800534A65 /* CXMLNode_XPathExtensions.m in Sources */,
-				4B5F7CAB19A1D77800C6F23C /* SearchDisplay.m in Sources */,
 				4BBFD1E419B589E100534A65 /* SearchResult.m in Sources */,
-				4B911E3A19938A74002324C9 /* LPTableViewController.m in Sources */,
 				4BBFD1D019B589CA00534A65 /* ChapterListViewController.m in Sources */,
 				4BBFD21B19B58A2800534A65 /* CXMLNamespaceNode.m in Sources */,
 				4BBFD1F719B589FD00534A65 /* zip.c in Sources */,
 				4BBFD1F519B589FD00534A65 /* mztools.c in Sources */,
+				4B1C42BA1A063EC500C51DDA /* SearchDisplay.m in Sources */,
 				4BBFD1D919B589D400534A65 /* GTMNSString+HTML.m in Sources */,
 				4BBFD21C19B58A2800534A65 /* CXMLNode_PrivateExtensions.m in Sources */,
-				4B911E3C19938A74002324C9 /* LPLibraryTableViewController.m in Sources */,
-				4B911E3E19938A74002324C9 /* LPBookDetailsViewController.m in Sources */,
+				4B1C42B41A063E9B00C51DDA /* LPCLibraryTableViewController.m in Sources */,
 				4BBFD1EA19B589F300534A65 /* ZipArchive.mm in Sources */,
-				4BF52CCC19EB9D91007CC9FC /* LPTableViewCell.m in Sources */,
 				4BBFD21A19B58A2800534A65 /* CXMLElement.m in Sources */,
 				4B911E4019938A74002324C9 /* LPLibraryViewController.m in Sources */,
 				4B911E4219938A74002324C9 /* LPRegisterViewController.m in Sources */,

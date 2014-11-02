@@ -1,21 +1,8 @@
-//
-//  LPTableViewCell.m
-//  LearningPlatform2
-//
-//  Created by Anushree Dhople on 10/13/14.
-//  Copyright (c) 2014 ___IQRAEDUCATION___. All rights reserved.
-//
 
-#import "LPTableViewCell.h"
-#import "Parse/Parse.h"
-#import "LPLibraryTableViewController.h"
-@implementation LPTableViewCell
+#import "LPTableCell.h"
 
-@synthesize nameLabel,lblauthor,lblGener,issuebtn;
+@implementation LPTableCell
 @synthesize delegate;
-@synthesize thumbnailImageView;
-
-
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -35,8 +22,8 @@
     
 }
 
--(IBAction)Issueclick:(id)sender {
-    
+- (IBAction)isuuebtnclick:(id)sender
+{
     UIButton *button = (UIButton *)sender;
     NSInteger row = button.tag;
     

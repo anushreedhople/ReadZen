@@ -23,8 +23,8 @@
 //@property (nonatomic, strong) NSArray *bookname;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchbar;
 
-
 @property (nonatomic, strong) NSMutableArray *booksids;
 @property (nonatomic, strong) NSMutableArray *bookgeneric;
+@property (nonatomic, strong) NSString *bookidloc;
 
 @end

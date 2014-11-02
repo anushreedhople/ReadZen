@@ -9,5 +9,5 @@
 #import "SearchDisplay.h"
 
 @implementation SearchDisplay
-
+@synthesize bookcover;
 @end

@@ -6,8 +6,15 @@
 //  Copyright (c) 2014 ___IQRAEDUCATION___. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
-@interface SearchDisplay : UISearchDisplayController
+@interface SearchDisplay : NSObject
+
+@property (nonatomic, strong) NSString *bookname;
+@property (nonatomic, strong) NSString *authorname;
+@property (nonatomic, strong) NSString *bookid;
+@property (nonatomic, strong) PFFile *bookcover;
+@property (nonatomic, strong) NSString *bookgenre;
 
 @end

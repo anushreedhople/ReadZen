@@ -50,57 +50,59 @@ int bookIndex;
     currentPageInSpineIndex = 0;
     pagesInCurrentSpineCount = 0;
     totalPagesCount = 0;
+    actualPagesCount = 0;
 	searching = NO;
     epubLoaded = NO;
     self.loadedEpub = [[EPub alloc] initWithEPubPath:[epubURL path]];
     epubLoaded = YES;
-    NSLog(@"loadEpub");
 	[self updatePagination];
-    readingMetric = [[ReadingMetric alloc]init];
+    /*readingMetric = [[ReadingMetric alloc]init];
     [readingMetric setBookIndex:bookIndex];
     [readingMetric bookIsOpened:[NSDate date]];
-    //NSLog(@"The global page count is %d",[self getGlobalPageCount]);
-    [readingMetric setTotalPages:[self getGlobalPageCount]];
+    [readingMetric setTotalPages:[self getGlobalPageCount]];*/
 }
 
+/*
 -(void) loadBookSource:(NSString *)bookweblink {
     booksource=bookweblink;
-}
+}*/
 
 - (void) chapterDidFinishLoad:(Chapter *)chapter{
-    totalPagesCount+=chapter.pageCount;
+    totalPagesCount+=chapter.locationPageCount;
+    actualPagesCount+=chapter.pageCount;
+    
 
 	if(chapter.chapterIndex + 1 < [loadedEpub.spineArray count]){
 		[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] setDelegate:self];
 		[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
-		[currentPageLabel setText:[NSString stringWithFormat:@"?/%d", totalPagesCount]];
+		[currentPageLabel setText:[NSString stringWithFormat:@"Page ? of %d   Loc ? of %d", actualPagesCount, totalPagesCount]];
 	} else {
-		[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d",[self getGlobalPageCount], totalPagesCount]];
+		[currentPageLabel setText:[NSString stringWithFormat:@"Page %d of %d   Loc %d of %d",[self getActualPageCount], actualPagesCount, [self getGlobalPageCount], totalPagesCount]];
 		[pageSlider setValue:(float)100*(float)[self getGlobalPageCount]/(float)totalPagesCount animated:YES];
 		paginating = NO;
-		//NSLog(@"Pagination Ended!");
         
         /*QuickFix - pages not getting loaded when book is opened first TODO*/
-        [self gotoNextPage];
-        [self gotoPrevPage];
+        //[self gotoNextPage];
+        //[self gotoPrevPage];
         
         /*Finished loading the book. Check if page number exists in User db and load relevant page*/
          //NSLog(@"Book loaded... checking for last page");
-         NSArray *spineIndexes = [[PFUser currentUser] valueForKey:@"spineindex"];
-         NSArray *pageIndexes = [[PFUser currentUser] valueForKey:@"pageindex"];
+         //NSArray *spineIndexes = [[PFUser currentUser] valueForKey:@"spineindex"];
+         //NSArray *pageIndexes = [[PFUser currentUser] valueForKey:@"pageindex"];
          
-         int spineIndex = [[spineIndexes objectAtIndex:bookIndex]intValue];
-         int pageIndex = [[pageIndexes objectAtIndex:bookIndex]intValue];
+         //int spineIndex = [[spineIndexes objectAtIndex:bookIndex]intValue];
+         //int pageIndex = [[pageIndexes objectAtIndex:bookIndex]intValue];
          
-         if(spineIndex != 0 && pageIndex !=0) {
+         //if(spineIndex != 0 && pageIndex !=0) {
          //NSLog(@"Previous loaded page found... shifting to it");
-         [self loadSpine:spineIndex atPageIndex:pageIndex highlightSearchResult:nil];
-         }
+         //[self loadSpine:spineIndex atPageIndex:pageIndex highlightSearchResult:nil];
+         //}
          //NSLog(@"loadEpub spineIndex %d pageIndex %d",spineIndex,pageIndex);
 
 	}
 }
 
+/*
 -(void)storeCurrentPageNo {
     
     NSMutableArray *spineIndex = [[NSMutableArray alloc] init];
@@ -112,27 +114,51 @@ int bookIndex;
     [spineIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d",currentSpineIndex]];
     [pageIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d", currentPageInSpineIndex]];
     
-    /*Add it to the Parse PFUser database*/
+    //Add it to the Parse PFUser database
     PFUser *user = [PFUser currentUser];
-    user[@"spineindex"] = spineIndex;
-    user[@"pageindex"]=pageIndex;
-    [[PFUser currentUser] saveInBackground];
+    //user[@"spineindex"] = spineIndex;
+    //user[@"pageindex"]=pageIndex;
+    //[[PFUser currentUser] saveInBackground];
 
 }
+*/
 
+/*
 -(void)setBookIndex:(int)receivedBookIndex{
     bookIndex = receivedBookIndex;
 }
+*/
 
 - (int) getGlobalPageCount{
-	int pageCounting = 0;
+	int pageCount = 0;
     
-	for(int i=1; i<currentSpineIndex; i++){
-		pageCounting+= [[loadedEpub.spineArray objectAtIndex:i] pageCount];
+	for(int i=0; i<currentSpineIndex; i++){
+		pageCount+= [[loadedEpub.spineArray objectAtIndex:i] locationPageCount];
     }
-	pageCounting+=currentPageInSpineIndex+1;
-	return pageCounting;
+	pageCount+=currentPageInSpineIndex+1;
+	return pageCount;
 }
+
+-(int) getActualPageCount {
+    
+    int actualPageCount = 0;
+    for(int i=0; i<currentSpineIndex; i++){
+        /*Get original page count from Chapters.m pageCount object*/
+        actualPageCount+= [[loadedEpub.spineArray objectAtIndex:i] pageCount];
+    }
+    
+    /*Get the actual page in current spine index without text increase*/
+    double range = (float)[[loadedEpub.spineArray objectAtIndex:currentSpineIndex] pageCount] / (float)[[loadedEpub.spineArray objectAtIndex:currentSpineIndex] locationPageCount];
+    double roundedRange = roundf(range*10)/10.0;
+    
+    double computedPageCount = (currentPageInSpineIndex+1)*roundedRange+0.9;
+    actualPageCount+= (int)floor(computedPageCount);
+    
+    return actualPageCount;
+}
+
+
+
 
 - (void) loadSpine:(int)spineIndex atPageIndex:(int)pageIndex {
 	[self loadSpine:spineIndex atPageIndex:pageIndex highlightSearchResult:nil];
@@ -148,23 +174,21 @@ int bookIndex;
 	[searchResultsPopover dismissPopoverAnimated:YES];
 	
 	NSURL* url = [NSURL fileURLWithPath:[[loadedEpub.spineArray objectAtIndex:spineIndex] spinePath]];
-    //NSLog(@"The url is %@",url);
 	[webView loadRequest:[NSURLRequest requestWithURL:url]];
 	currentPageInSpineIndex = pageIndex;
 	currentSpineIndex = spineIndex;
     
     
 	if(!paginating){
-		[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d",[self getGlobalPageCount], totalPagesCount]];
+		[currentPageLabel setText:[NSString stringWithFormat:@"Page %d of %d   Loc %d of %d",[self getActualPageCount], actualPagesCount, [self getGlobalPageCount], totalPagesCount]];
 		[pageSlider setValue:(float)100*(float)[self getGlobalPageCount]/(float)totalPagesCount animated:YES];	
 	}
     
     /*change pagesInCurrentSpineIndex variable also*/
 	/*int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
 	pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
-    NSLog(@"loadSpine totalWidth:%d webView width %f", totalWidth, webView.bounds.size.width);*/
-    
-    
+    */
+
     webView.hidden=NO;
 }
 
@@ -183,7 +207,7 @@ int bookIndex;
 	[webView stringByEvaluatingJavaScriptFromString:goTo];
 	
 	if(!paginating){
-		[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d",[self getGlobalPageCount], totalPagesCount]];
+		[currentPageLabel setText:[NSString stringWithFormat:@"Page %d of %d   Loc %d of %d",[self getActualPageCount], actualPagesCount, [self getGlobalPageCount], totalPagesCount]];
 		[pageSlider setValue:(float)100*(float)[self getGlobalPageCount]/(float)totalPagesCount animated:YES];
 	}
 	
@@ -205,18 +229,16 @@ int bookIndex;
 			[self loadSpine:--currentSpineIndex atPageIndex:0];
 		}	
 	}
-}
+}   
 
 - (void) gotoNextPage {
     
-    [readingMetric pagescroll:[NSDate date]];
+    //[readingMetric pagescroll:[NSDate date]];
     
 	if(!paginating){
 		if(currentPageInSpineIndex+1<pagesInCurrentSpineCount){
-            //NSLog(@"Going to next page");
 			[self gotoPageInCurrentSpine:++currentPageInSpineIndex];
 		} else {
-            //NSLog(@"Going to next spine");
 			[self gotoNextSpine];
 		}		
 	}
@@ -224,13 +246,13 @@ int bookIndex;
 
 - (void) gotoPrevPage {
     
-    [readingMetric pagescroll:[NSDate date]];
+    //[readingMetric pagescroll:[NSDate date]];
 	if (!paginating) {
 		if(currentPageInSpineIndex-1>=0){
 			[self gotoPageInCurrentSpine:--currentPageInSpineIndex];
 		} else {
 			if(currentSpineIndex!=0){
-				int targetPage = [[loadedEpub.spineArray objectAtIndex:(currentSpineIndex-1)] pageCount];
+				int targetPage = [[loadedEpub.spineArray objectAtIndex:(currentSpineIndex-1)] locationPageCount];
 				[self loadSpine:--currentSpineIndex atPageIndex:targetPage-1];
 			}
 		}
@@ -239,11 +261,10 @@ int bookIndex;
 
 
 - (IBAction) increaseTextSizeClicked:(id)sender{
-    NSLog(@"Increase text size is clicked");
 	if(!paginating){
-        NSLog(@"inside first if loop");
 		if(currentTextSize+25<=200){
-            NSLog(@"inside second if loop");
+            totalPagesCount=0;
+            actualPagesCount=0;
 			currentTextSize+=25;
 			[self updatePagination];
 			if(currentTextSize == 200){
@@ -256,6 +277,8 @@ int bookIndex;
 - (IBAction) decreaseTextSizeClicked:(id)sender{
 	if(!paginating){
 		if(currentTextSize-25>=50){
+            totalPagesCount=0;
+            actualPagesCount=0;
 			currentTextSize-=25;
 			[self updatePagination];
 			if(currentTextSize==50){
@@ -276,7 +299,7 @@ int bookIndex;
     if (targetPage==0) {
         targetPage++;
     }
-	[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d", targetPage, totalPagesCount]];
+	//[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d", targetPage, totalPagesCount]];
 }
 
 - (IBAction) slidingEnded:(id)sender{
@@ -287,11 +310,10 @@ int bookIndex;
 	int pageSum = 0;
 	int chapterIndex = 0;
 	int pageIndex = 0;
-	for(chapterIndex=1; chapterIndex<[loadedEpub.spineArray count]; chapterIndex++){
-		pageSum+=[[loadedEpub.spineArray objectAtIndex:chapterIndex] pageCount];
-//		NSLog(@"Chapter %d, targetPage: %d, pageSum: %d, pageIndex: %d", chapterIndex, targetPage, pageSum, (pageSum-targetPage));
+	for(chapterIndex=0; chapterIndex<[loadedEpub.spineArray count]; chapterIndex++){
+		pageSum+=[[loadedEpub.spineArray objectAtIndex:chapterIndex] locationPageCount];
 		if(pageSum>=targetPage){
-			pageIndex = [[loadedEpub.spineArray objectAtIndex:chapterIndex] pageCount] - 1 - pageSum + targetPage;
+			pageIndex = [[loadedEpub.spineArray objectAtIndex:chapterIndex] locationPageCount] - 1 - pageSum + targetPage;
 			break;
 		}
 	}
@@ -315,8 +337,6 @@ int bookIndex;
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView{
-    
-    NSLog(@"WebViewDidFinshLoad is called");
 	
 	NSString *varMySheet = @"var mySheet = document.styleSheets[0];";
 	
@@ -348,7 +368,6 @@ int bookIndex;
 	[webView stringByEvaluatingJavaScriptFromString:setHighlightColorRule];
 	
 	if(currentSearchResult!=nil){
-	//	NSLog(@"Highlighting %@", currentSearchResult.originatingQuery);
         [webView highlightAllOccurencesOfString:currentSearchResult.originatingQuery];
 	}
 	
@@ -362,7 +381,6 @@ int bookIndex;
 - (void) updatePagination{
 	if(epubLoaded){
         if(!paginating){
-            NSLog(@"Pagination Started!");
             paginating = YES;
             totalPagesCount=0;
             [self loadSpine:currentSpineIndex atPageIndex:currentPageInSpineIndex];
@@ -370,7 +388,7 @@ int bookIndex;
             self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(20, 142, 728,811)];
             [[loadedEpub.spineArray objectAtIndex:0] setDelegate:self];
             [[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
-            [currentPageLabel setText:@"?/?"];
+            //[currentPageLabel setText:@"?/?"];
         }
 	}
     self.webView.hidden=NO;
@@ -385,7 +403,6 @@ int bookIndex;
 	if (![searchResultsPopover isPopoverVisible]) {
 		[searchResultsPopover presentPopoverFromRect:searchBar.bounds inView:searchBar permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 	}
-//	NSLog(@"Searching for %@", [searchBar text]);
 	if(!searching){
 		searching = YES;
 		[searchResViewController searchString:[searchBar text]];
@@ -399,33 +416,23 @@ int bookIndex;
 
 // Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    NSLog(@"shouldAutorotate");
     [self updatePagination];
 	return YES;
 }
 
+/*
 - (IBAction) openWebLink:(id)sender{
     
-    /*Get the weblink from Parse*/
+    //Get the weblink from Parse
     NSString *urlString= booksource;
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
+*/
 
+/*
 -(void)saveAction:(id)sender
 {
-    /*   NSRange selectedRange = [webView selectedRange];
-     
-     NSDictionary *currentAttributesDict = [_textView.textStorage attributesAtIndex:selectedRange.location effectiveRange:nil];
-     
-     if ([currentAttributesDict objectForKey:NSForegroundColorAttributeName] == nil ||
-     [currentAttributesDict objectForKey:NSForegroundColorAttributeName] != [UIColor redColor]) {
-     
-     NSDictionary *dict = @{NSForegroundColorAttributeName: [UIColor redColor]};
-             [_textView.textStorage beginEditing];
-             [_textView.textStorage setAttributes:dict range:selectedRange];
-             [_textView.textStorage endEditing];
-         }
-         */
+ 
     [self.webView copy:[UIApplication sharedApplication]];
     NSString *text = [UIPasteboard generalPasteboard].string;
     
@@ -436,6 +443,7 @@ int bookIndex;
     NSLog(@"Save button is selected and string selected is text: %@ and newText %@ and sampleText %@", text, newText, sampleText);
     
 }
+ */
 
 /*
 - (void)handleTapGesture:(UITapGestureRecognizer *)tapGesture {
@@ -463,16 +471,16 @@ int bookIndex;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     [self.view addGestureRecognizer:tapGesture];*/
     
-    self.websource.title = @"Book Source:";
-    NSUInteger size=15;
-    UIFont *font = [UIFont boldSystemFontOfSize:size];
-    NSDictionary *attributes = @{NSFontAttributeName: font};
-    [self.websource setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    //self.websource.title = @"Book Source:";
+    //NSUInteger size=15;
+    //UIFont *font = [UIFont boldSystemFontOfSize:size];
+    //NSDictionary *attributes = @{NSFontAttributeName: font};
+    //[self.websource setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
-    self.weblink.title = @"Click here to view book source";
-    font = [UIFont fontWithName:@"Optima-BoldItalic" size:size];
-    attributes = @{NSFontAttributeName: font};
-    [self.weblink setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    //self.weblink.title = @"Click here to view book source";
+    //font = [UIFont fontWithName:@"Optima-BoldItalic" size:size];
+    //attributes = @{NSFontAttributeName: font};
+    //[self.weblink setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
 	[webView setDelegate:self];
 		
@@ -545,10 +553,9 @@ int bookIndex;
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     if (![parent isEqual:self.parentViewController]) {
-        //NSLog(@"Book is being closed now");
         /*Back button is pressed. Save the current page number */
-        [self storeCurrentPageNo];
-        [readingMetric bookIsClosed:[NSDate date]];
+        //[self storeCurrentPageNo];
+        //[readingMetric bookIsClosed:[NSDate date]];
     }
 }
 
@@ -584,7 +591,6 @@ int bookIndex;
     [webView stringByEvaluatingJavaScriptFromString:setHighlightColorRule];
     
     if(currentSearchResult!=nil){
-        // NSLog(@"Highlighting %@", currentSearchResult.originatingQuery);
         [webView highlightAllOccurencesOfString:currentSearchResult.originatingQuery];
     }
     

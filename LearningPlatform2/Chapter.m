@@ -11,7 +11,7 @@
 
 @implementation Chapter 
 
-@synthesize delegate, chapterIndex, title, pageCount, spinePath, text, windowSize, fontPercentSize;
+@synthesize delegate, chapterIndex, title, pageCount, locationPageCount, spinePath, text, windowSize, fontPercentSize;
 
 - (id) initWithPath:(NSString*)theSpinePath title:(NSString*)theTitle chapterIndex:(int) theIndex{
     if((self=[super init])){
@@ -71,7 +71,16 @@
     [webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
     
 	int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
-	pageCount = (int)((float)totalWidth/728);
+	if(pageCount == 0){
+        pageCount = (int)((float)totalWidth/728);
+        locationPageCount = (int)((float)totalWidth/728);
+    }
+    else {
+        /*Font size has been inc/dec*/
+        locationPageCount=(int)((float)totalWidth/728);
+        
+    }
+
 
     [webView dealloc];
     [delegate chapterDidFinishLoad:self];
