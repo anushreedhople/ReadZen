@@ -104,20 +104,26 @@
 //	NSLog(@"itemsArray size: %d", [itemsArray count]);
     
     NSString* ncxFileName;
-	
+    
     NSMutableDictionary* itemDictionary = [[NSMutableDictionary alloc] init];
-	for (CXMLElement* element in itemsArray) {
-		[itemDictionary setValue:[[element attributeForName:@"href"] stringValue] forKey:[[element attributeForName:@"id"] stringValue]];
+    for (CXMLElement* element in itemsArray) {
+        [itemDictionary setValue:[[element attributeForName:@"href"] stringValue] forKey:[[element attributeForName:@"id"] stringValue]];
         if([[[element attributeForName:@"media-type"] stringValue] isEqualToString:@"application/x-dtbncx+xml"]){
-            ncxFileName = [[element attributeForName:@"href"] stringValue];
-//          NSLog(@"%@ : %@", [[element attributeForName:@"id"] stringValue], [[element attributeForName:@"href"] stringValue]);
+            if([[[element attributeForName:@"id"] stringValue] isEqualToString:@"ncx"]){
+                ncxFileName = [[element attributeForName:@"href"] stringValue];
+            }
+            
+            NSLog(@"%@ : %@", [[element attributeForName:@"id"] stringValue], [[element attributeForName:@"href"] stringValue]);
         }
         
         if([[[element attributeForName:@"media-type"] stringValue] isEqualToString:@"application/xhtml+xml"]){
-            ncxFileName = [[element attributeForName:@"href"] stringValue];
-//          NSLog(@"%@ : %@", [[element attributeForName:@"id"] stringValue], [[element attributeForName:@"href"] stringValue]);
+            if([[[element attributeForName:@"id"] stringValue] isEqualToString:@"ncx"]){
+                ncxFileName = [[element attributeForName:@"ncx"] stringValue];
+            }
+            NSLog(@"%@ : %@", [[element attributeForName:@"id"] stringValue], [[element attributeForName:@"href"] stringValue]);
         }
-	}
+    }
+    
 	
     int lastSlash = [opfPath rangeOfString:@"/" options:NSBackwardsSearch].location;
 	NSString* ebookBasePath = [opfPath substringToIndex:(lastSlash +1)];

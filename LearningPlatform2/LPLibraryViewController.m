@@ -91,9 +91,15 @@ int buttonid=0;
     //First clear all button subviews to avoid overlap
     for(UIView *subview in self.view.subviews){
         if([subview isKindOfClass:[UIButton class]]) {
-            if(subview.tag) { /*to remove only book buttons and not goto library and logout buttons*/
+            //if(subview.tag) { /*to remove only book buttons and not goto library and logout buttons*/
             [subview removeFromSuperview];
-            }
+            //}
+            //else {
+            //    NSLog(@"This is not a tagged button. Do not remove");
+            //}
+        }
+        else {
+            NSLog(@"This is not a button. Do not remove");
         }
     }
     
@@ -101,6 +107,7 @@ int buttonid=0;
     
     if([PFUser currentUser]) {
         [self.bookids addObjectsFromArray:[[PFUser currentUser] valueForKey:@"bookids"]];
+        NSLog(@"The bookid count is %lu", (unsigned long)self.bookids.count);
         for(int i=0; i<self.bookids.count; i++) {
             NSString *bookid = [self.bookids objectAtIndex:i];
             PFQuery *query = [PFQuery queryWithClassName:@"BookRepository"];
@@ -282,11 +289,11 @@ int buttonid=0;
 -(void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     /*The user clicked OK */
     if(buttonIndex == 0){
-        //NSLog(@"User wants to remove book from library at index %d", buttonid);
+        NSLog(@"User wants to remove book from library at index %d", buttonid);
         PFUser *currentUser = [PFUser currentUser];
         NSMutableArray *booksids = [currentUser valueForKey:@"bookids"];
         if(booksids){
-            //NSLog(@"Array of issued books retrieved");
+            NSLog(@"Array of issued books retrieved");
             [booksids removeObjectAtIndex:buttonid];
             currentUser[@"bookids"] = booksids;
             [currentUser save];

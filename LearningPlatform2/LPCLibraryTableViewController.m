@@ -230,8 +230,8 @@ BOOL searchstatus=NO;
             [alert show];
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Issue Alert!"
-                                                            message:@"Book is issued. Please go to your library to read."
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Book Issued"
+                                                            message:@"Please go back to your library to read."
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
