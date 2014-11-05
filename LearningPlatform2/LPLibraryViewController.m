@@ -10,7 +10,6 @@
 #import "Parse/Parse.h"
 #import "LPLibraryTableViewController.h"
 #import "EPubViewController.h"
-#import "PopoverViewController.h"
 
 const int THUMBNAIL_WIDTH = 150;
 const int THUMBNAIL_HEIGHT = 250;
@@ -327,6 +326,7 @@ int buttonid=0;
     
 }
 
+/*
 -(IBAction)sort:(id)sender {
     
     NSLog(@"Sort button is pressed");
@@ -351,7 +351,7 @@ int buttonid=0;
     
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:popController];
     [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-}
+}*/
 
 
 @end

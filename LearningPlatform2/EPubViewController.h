@@ -1,9 +1,9 @@
 //
 //  DetailViewController.h
-//  AePubReader
+//  LearningPlatform2
 //
-//  Created by Federico Frappi on 04/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Anushree Dhople on 7/27/14.
+//  Copyright (c) 2014 ___IQRAEDUCATION___. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,11 +11,14 @@
 #import "EPub.h"
 #import "Chapter.h"
 #import "ReadingMetric.h"
+#import "LPDropViewController.h"
+#import "LPNotesViewController.h"
 
 @class SearchResultsViewController;
 @class SearchResult;
+#import <MessageUI/MessageUI.h>
 
-@interface EPubViewController : UIViewController <UIWebViewDelegate, ChapterDelegate, UISearchBarDelegate> {
+@interface EPubViewController : UIViewController <MFMailComposeViewControllerDelegate,UIWebViewDelegate, ChapterDelegate, UISearchBarDelegate,environmentChange,UIPopoverControllerDelegate> {
     
     UIToolbar *toolbar;
         
@@ -46,7 +49,10 @@
 
     SearchResultsViewController* searchResViewController;
     SearchResult* currentSearchResult;
+    LPDropViewController *m_objDropViewController;
+    UIPopoverController *m_popOverNotes;
     
+    LPNotesViewController *m_objNotesViewController;
     NSString *booksource;
     
     ReadingMetric* readingMetric;
@@ -60,16 +66,22 @@
 - (IBAction) doneClicked:(id)sender;
 - (IBAction) openWebLink:(id)sender;
 
+@property (retain, nonatomic) IBOutlet UIView *searchView;
 - (void) loadSpine:(int)spineIndex atPageIndex:(int)pageIndex highlightSearchResult:(SearchResult*)theResult;
-
+- (void) hideSearchView;
 - (void) loadEpub:(NSURL*) epubURL;
 -(void) loadBookSource:(NSString *)bookweblink;
 - (void) storeCurrentPageNo;
 - (void) setBookIndex:(int)bookIndex;
+-(void) removeAllHighLights;
+
+- (void) loadSpineWithTitle:(NSString *)strTitle andSpineIndex:(int) iSpineIndex;
 
 - (void)showPopover:(id)sender;
+- (void) highLightBookMark:(BOOL) bIsYes;
 
 @property (nonatomic, retain) EPub* loadedEpub;
+@property (nonatomic, retain) NSString* strBookName;
 
 @property (nonatomic, retain) SearchResult* currentSearchResult;
 
@@ -88,7 +100,39 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *websource;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *weblink;
 @property BOOL searching;
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic, strong) UIPopoverController *popController;
+
+@property (nonatomic, retain) IBOutlet UIButton *btnHome;
+- (IBAction)takeToHomeScreen:(id)sender;
+
+@property (nonatomic, retain) IBOutlet UIButton *chapter;
+- (IBAction)showChapterList:(id)sender;
+
+@property (nonatomic, retain) IBOutlet UIButton *readingMetric;
+- (IBAction)showReadingMetric:(id)sender;
+
+@property (nonatomic, retain) IBOutlet UIButton *btnBookMarkPage;
+- (IBAction)takeToBookMarkPage:(id)sender;
+
+
+@property (retain, nonatomic) IBOutlet UIView *m_vwBookMark;
+- (IBAction)fontSizeChanged:(id)sender;
+
+
+
+@property (nonatomic, retain) IBOutlet UIButton *btnSearch;
+- (IBAction)openSearchPanel:(id)sender;
+
+
+@property (nonatomic, retain) IBOutlet UIButton *btnBrightness;
+- (IBAction)adjustBrightness:(id)sender;
+
+
+@property (nonatomic, retain) IBOutlet UIButton *btnBookMark;
+- (IBAction)showBookMarks:(id)sender;
+
+-(void) removeAllHighLights;
 
 @end

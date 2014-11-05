@@ -1,10 +1,9 @@
 //
 //  EPub.m
-//  AePubReader
+//  LearningPlatform2
 //
-//  Created by Federico Frappi on 05/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+//  Created by Anushree Dhople on 7/27/14.
+//  Copyright (c) 2014 ___IQRAEDUCATION___. All rights reserved.//
 
 #import "EPub.h"
 #import "ZipArchive.h"

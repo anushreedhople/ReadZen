@@ -1,9 +1,9 @@
 //
 //  SearchResultsViewController.m
-//  AePubReader
+//  LearningPlatform2
 //
-//  Created by Federico Frappi on 05/05/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Anushree Dhople on 7/27/14.
+//  Copyright (c) 2014 ___IQRAEDUCATION___. All rights reserved.
 //
 
 #import "SearchResultsViewController.h"
@@ -33,7 +33,18 @@
     
     SearchResult* hit = (SearchResult*)[results objectAtIndex:[indexPath row]];
     cell.textLabel.text = [NSString stringWithFormat:@"...%@...", hit.neighboringText];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Chapter %d - page %d", hit.chapterIndex, hit.pageIndex+1];
+    NSString *chapterTitle=[[epubViewController.loadedEpub.spineArray objectAtIndex:hit.chapterIndex] title];
+    
+    if ([chapterTitle isKindOfClass:[NSString class]]) {
+        if ([chapterTitle isEqualToString:@"(null)"] || [chapterTitle isEqualToString:@"NULL"]) {
+            chapterTitle=@"";
+        }
+    }
+    if ([chapterTitle isKindOfClass:[NSNull class]]) {
+        chapterTitle=@"";
+    }
+    NSLog(@"%d",hit.pageIndex + 1);
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - page %d",chapterTitle, hit.pageIndex+1];
     return cell;
 }
 
@@ -43,8 +54,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SearchResult* hit = (SearchResult*)[results objectAtIndex:[indexPath row]];
-
-    [epubViewController loadSpine:hit.chapterIndex atPageIndex:hit.pageIndex highlightSearchResult:hit];    
+    
+    [epubViewController hideSearchView];
+    [epubViewController loadSpine:hit.chapterIndex atPageIndex:hit.pageIndex highlightSearchResult:hit];
 }
 
 - (void) searchString:(NSString*)query{
@@ -74,7 +86,7 @@
         UIWebView* webView = [[UIWebView alloc] initWithFrame:chapter.windowSize];
         [webView setDelegate:self];
         NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:chapter.spinePath]];
-        [webView loadRequest:urlRequest];   
+        [webView loadRequest:urlRequest];
     } else {
         if((currentChapterIndex+1)<[epubViewController.loadedEpub.spineArray count]){
             [self searchString:currentQuery inChapterAtIndex:(currentChapterIndex+1)];

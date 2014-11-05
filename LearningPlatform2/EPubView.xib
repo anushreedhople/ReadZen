@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EPubViewController">
             <connections>
+                <outlet property="btnBookMark" destination="l02-k1-fGg" id="1GN-57-col"/>
+                <outlet property="btnBookMarkPage" destination="UaI-Nk-TFd" id="zLn-73-qRr"/>
+                <outlet property="btnBrightness" destination="cYm-hW-V3H" id="FMZ-RS-eaz"/>
+                <outlet property="btnHome" destination="cZm-E0-dRd" id="Hvq-Ie-hV0"/>
+                <outlet property="btnSearch" destination="qih-Fl-8md" id="70p-ZB-Kwv"/>
+                <outlet property="chapter" destination="uZP-Od-kla" id="WTZ-Gu-YGu"/>
                 <outlet property="chapterListButton" destination="103" id="dSm-sr-qFa"/>
                 <outlet property="currentPageLabel" destination="94" id="95"/>
                 <outlet property="decTextSizeButton" destination="86" id="91"/>
                 <outlet property="incTextSizeButton" destination="88" id="92"/>
+                <outlet property="m_vwBookMark" destination="G1Z-Dt-Lnc" id="LLq-cB-YeM"/>
                 <outlet property="pageSlider" destination="93" id="96"/>
+                <outlet property="readingMetric" destination="g7a-MU-E1j" id="XE5-35-qeQ"/>
+                <outlet property="searchBar" destination="1Kx-L0-hGB" id="SlL-PR-l44"/>
+                <outlet property="searchView" destination="4mt-mJ-ODV" id="rfu-RV-NDI"/>
                 <outlet property="toolbar" destination="63" id="65"/>
                 <outlet property="view" destination="8" id="12"/>
-                <outlet property="webView" destination="69" id="koW-IU-Fpk"/>
+                <outlet property="webView" destination="69" id="iDS-vD-jjR"/>
                 <outlet property="weblink" destination="DSZ-XY-jzl" id="mwR-8n-KO1"/>
                 <outlet property="websource" destination="u2H-66-pB4" id="Vvb-gR-I3x"/>
             </connections>
@@ -24,70 +34,8 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="63">
-                    <rect key="frame" x="0.0" y="89" width="768" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <barButtonItem title="Chapters" id="103">
-                            <connections>
-                                <action selector="showChapterIndex:" destination="-1" id="113"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="87"/>
-                        <barButtonItem title="a" id="86">
-                            <connections>
-                                <action selector="decreaseTextSizeClicked:" destination="-1" id="89"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="A" id="88">
-                            <connections>
-                                <action selector="increaseTextSizeClicked:" destination="-1" id="90"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="73"/>
-                        <barButtonItem style="plain" id="125">
-                            <searchBar key="customView" contentMode="redraw" barStyle="black" text="" id="124">
-                                <rect key="frame" x="463" y="0.0" width="237" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-1" id="126"/>
-                                </connections>
-                            </searchBar>
-                        </barButtonItem>
-                        <barButtonItem style="done" systemItem="done" id="127">
-                            <connections>
-                                <action selector="doneClicked:" destination="-1" id="Hlp-K2-QvQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </items>
-                </toolbar>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0099999997764825821" maxValue="100" id="93">
-                    <rect key="frame" x="18" y="950" width="732" height="29"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <connections>
-                        <action selector="slidingEnded:" destination="-1" eventType="touchUpInside" id="101"/>
-                        <action selector="slidingEnded:" destination="-1" eventType="touchUpOutside" id="102"/>
-                        <action selector="slidingStarted:" destination="-1" eventType="valueChanged" id="97"/>
-                    </connections>
-                </slider>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="94">
-                    <rect key="frame" x="256" y="953" width="265" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <webView multipleTouchEnabled="YES" contentMode="center" id="69" userLabel="Web View">
-                    <rect key="frame" x="20" y="142" width="728" height="811"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <dataDetectorType key="dataDetectorTypes"/>
-                    <connections>
-                        <outlet property="delegate" destination="8" id="NYV-bn-mak"/>
-                    </connections>
-                </webView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="uC9-ZZ-7wx">
-                    <rect key="frame" x="8" y="972" width="768" height="44"/>
+                <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="uC9-ZZ-7wx">
+                    <rect key="frame" x="-10" y="985" width="768" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem width="210" style="plain" systemItem="fixedSpace" id="XZE-B9-lP8"/>
@@ -99,14 +47,196 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
+                <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="63">
+                    <rect key="frame" x="0.0" y="89" width="768" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <barButtonItem title="Chapters" id="103"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="87"/>
+                        <barButtonItem title="a" id="86"/>
+                        <barButtonItem title="A" id="88"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="73"/>
+                        <barButtonItem style="plain" id="125">
+                            <searchBar key="customView" contentMode="redraw" barStyle="black" text="" id="124">
+                                <rect key="frame" x="463" y="0.0" width="237" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </barButtonItem>
+                        <barButtonItem style="done" systemItem="done" id="127">
+                            <connections>
+                                <action selector="doneClicked:" destination="-1" id="Hlp-K2-QvQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0099999997764825821" maxValue="100" id="93">
+                    <rect key="frame" x="18" y="997" width="732" height="29"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <connections>
+                        <action selector="slidingEnded:" destination="-1" eventType="touchUpOutside" id="102"/>
+                        <action selector="slidingStarted:" destination="-1" eventType="valueChanged" id="97"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="94">
+                    <rect key="frame" x="334" y="992" width="100" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <webView multipleTouchEnabled="YES" contentMode="center" id="69" userLabel="Web View">
+                    <rect key="frame" x="20" y="48" width="728" height="945"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <dataDetectorType key="dataDetectorTypes"/>
+                    <connections>
+                        <outlet property="delegate" destination="8" id="NYV-bn-mak"/>
+                    </connections>
+                </webView>
+                <view contentMode="scaleToFill" id="zjl-sU-O38">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ood-j5-vMi">
+                            <rect key="frame" x="594" y="12" width="37" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cZm-E0-dRd">
+                            <rect key="frame" x="24" y="12" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="home.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="takeToHomeScreen:" destination="-1" eventType="touchUpInside" id="v1D-NT-sYh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uZP-Od-kla">
+                            <rect key="frame" x="79" y="12" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="chapter.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showChapterIndex:" destination="-1" eventType="touchDown" id="cbD-5d-dP6"/>
+                                <action selector="showChapterList:" destination="-1" eventType="touchUpInside" id="JsD-Ve-y6p"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g7a-MU-E1j">
+                            <rect key="frame" x="134" y="12" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="glasses.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showReadingMetric:" destination="-1" eventType="touchUpInside" id="2X5-Nr-TYS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" alpha="0.34999999999999964" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UaI-Nk-TFd">
+                            <rect key="frame" x="134" y="13" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="time.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="takeToBookMarkPage:" destination="-1" eventType="touchUpInside" id="TD8-4B-78L"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qih-Fl-8md">
+                            <rect key="frame" x="718" y="12" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="search.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="openSearchPanel:" destination="-1" eventType="touchDown" id="IER-Ee-7AE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vf2-Bu-Z85">
+                            <rect key="frame" x="588" y="8" width="47" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
+                            <state key="normal">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="fontSizeChanged:" destination="-1" eventType="touchUpInside" id="mVM-TS-0Ho"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cYm-hW-V3H">
+                            <rect key="frame" x="666" y="12" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="brightness.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="adjustBrightness:" destination="-1" eventType="touchDown" id="X9o-9N-iwv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l02-k1-fGg">
+                            <rect key="frame" x="186" y="6" width="32" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" image="bookmark.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showBookMarks:" destination="-1" eventType="touchDown" id="gZ0-Nn-ar7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94117653369903564" green="0.91372555494308472" blue="0.88627457618713379" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" id="G1Z-Dt-Lnc">
+                    <rect key="frame" x="688" y="0.0" width="80" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmark12.png" id="gUF-iA-IkL">
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" id="4mt-mJ-ODV">
+                    <rect key="frame" x="0.0" y="0.0" width="766" height="1000"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <searchBar hidden="YES" contentMode="redraw" placeholder="Search" id="1Kx-L0-hGB">
+                            <rect key="frame" x="510" y="0.0" width="258" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.88688982660000004" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="qDm-xk-ktV"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
+    <resources>
+        <image name="bookmark.png" width="32" height="32"/>
+        <image name="bookmark12.png" width="32" height="32"/>
+        <image name="brightness.png" width="30" height="30"/>
+        <image name="chapter.png" width="32" height="32"/>
+        <image name="glasses.png" width="32" height="32"/>
+        <image name="home.png" width="24" height="24"/>
+        <image name="search.png" width="32" height="32"/>
+        <image name="time.png" width="25" height="25"/>
+    </resources>
 </document>
