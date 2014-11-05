@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LearningPlatform2/EPubViewController.m"
-            timestampString = "436875201.882944"
+            timestampString = "436915914.205458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "906"
-            endingLineNumber = "906"
+            startingLineNumber = "929"
+            endingLineNumber = "929"
             landmarkName = "-didMoveToParentViewController:"
             landmarkType = "5">
          </BreakpointContent>

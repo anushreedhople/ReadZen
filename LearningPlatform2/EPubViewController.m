@@ -41,7 +41,7 @@ int bookIndex;
 @synthesize chapterListButton, decTextSizeButton, incTextSizeButton;
 @synthesize currentPageLabel, pageSlider, searching;
 @synthesize currentSearchResult;
-@synthesize  weblink, websource;
+@synthesize weblink, websource;
 
 #pragma mark -
 
@@ -258,6 +258,7 @@ int bookIndex;
 }
 
 - (void) gotoPageInCurrentSpine:(int)pageIndex{
+    
 	if(pageIndex>=pagesInCurrentSpineCount){
 		pageIndex = pagesInCurrentSpineCount - 1;
 		currentPageInSpineIndex = pagesInCurrentSpineCount - 1;	
@@ -299,11 +300,15 @@ int bookIndex;
 - (void) gotoNextPage {
     
     //[readingMetric pagescroll:[NSDate date]];
+    NSLog(@"Goto next page is called");
     
 	if(!paginating){
+        NSLog(@"!paginating....   currentPageInSpineIndex %d  pagesInCurrentSpineCount %d", currentPageInSpineIndex, pagesInCurrentSpineCount);
 		if(currentPageInSpineIndex+1<pagesInCurrentSpineCount){
+            NSLog(@"gotoPageInCurrentSpine called");
 			[self gotoPageInCurrentSpine:++currentPageInSpineIndex];
 		} else {
+            NSLog(@"Goto next spine is called");
 			[self gotoNextSpine];
 		}
         [self checkForBookMarkAndShowIcon:2];
@@ -355,6 +360,8 @@ int bookIndex;
 
 -(void)checkForBookMarkAndShowIcon:(int) isCallFromPrevPage{
     
+    //NSLog(@"checkForBookMarkAndShowIcon is called");
+    
     /*TODO - Check behavior in model App and replicate for magnification*/
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -369,38 +376,45 @@ int bookIndex;
                 //NSLog(@"'%@' '%@'",[dict objectForKey:@"chapterName"],[self getChapterNameOfBook]);
                 
                 if (isCallFromPrevPage==3) {
+                    //NSLog(@"Code is 3");
                     if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName]){
                         
-                        NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+                        /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+                        int strPage = [self getActualPageCount];
                         
-                        if ([[dict objectForKey:@"pageNumber"] intValue] == [strPage intValue]) {
+                        if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
                             [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
                             break;
                         }else{
                             [_btnBookMark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
                         }
-                        
                     }
-                    
-                    
+
                 }else if (isCallFromPrevPage==2){
+                    //NSLog(@"Code is 2");
                     if (currentPageInSpineIndex==0) {
                         //                        int iIndex=[self getIndexOfChapter:[self getChapterNameOfBook]];
                         //                        NSString *strChapter=[[self.loadedEpub.spineArray objectAtIndex:++iIndex] title] ;
                         
                         NSString *strChapter=[self getChapterNameOfBook];
+                        //NSLog(@"The chapter name is %@", strChapter);
                         
                         if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:strChapter] ){
+                            //NSLog(@"Conditions matched");
                             
-                            NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+                            /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+                            int strPage = [self getActualPageCount];
                             
-                            if ([[dict objectForKey:@"pageNumber"] intValue] == [strPage intValue]) {
+                            if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
+                                //NSLog(@"Setting bookmark12-1");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
                                 break;
                             }else{
+                                //NSLog(@"Setting bookmark-1");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
                             }
                         }else{
+                            //NSLog(@"Conditions did not match");
                             
                             //chapter 21 to chapter22 move
                             //chap 21 0 pageindex is book mark so that chapter 22 page 0 will not be bookmark
@@ -410,24 +424,30 @@ int bookIndex;
                     
                     else{
                         
+                        //NSLog(@"This is not the first page");
+                        //NSLog(@"Dictionary bookname: %@ strBookName: %@", [dict objectForKey:@"bookname"], self.strBookName);
+                        //NSLog(@"Dictionary chaptername: %@ strChapterName: %@", [dict objectForKey:@"chapterName"], [self getChapterNameOfBook]);
+                        
                         if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:[self getChapterNameOfBook]]) {
                             
-                            NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+                            //NSLog(@"Conditions matched");
                             
-                            if ([[dict objectForKey:@"pageNumber"] intValue] == [strPage intValue]) {
+                            /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+                            int strPage = [self getActualPageCount];
+                            
+                            if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
+                                //NSLog(@"Setting bookmark 12-2");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
                                 break;
                             }else{
+                                //NSLog(@"Setting bookmark-2");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
                             }
                         }
                     }
                 }
-                
-                
-                
-                
                 else{
+                    //NSLog(@"Code is 1");
                     //chapter 22 to 21 move
                     //chap 21 final pageindex is book mark so that chapter 22 page 0 will not be bookmark
                     //                    if (pagesInCurrentSpineCount+1==currentPageInSpineIndex-1 || pagesInCurrentSpineCount == currentPageInSpineIndex|| pagesInCurrentSpineCount+1== currentPageInSpineIndex) {
@@ -454,9 +474,10 @@ int bookIndex;
                     //                    {
                     if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:[self getChapterNameOfBook]]) {
                         
-                        NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+                        /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+                        int strPage = [self getActualPageCount];
                         
-                        if ([[dict objectForKey:@"pageNumber"] intValue] == [strPage intValue]) {
+                        if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
                             [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
                             break;
                         }else{
@@ -475,13 +496,15 @@ int bookIndex;
 
 
 - (IBAction) increaseTextSizeClicked:(id)sender{
+    NSLog(@"Increase text size is clicked");
 	if(!paginating){
 		if(currentTextSize+25<=200){
+            NSLog(@"Increasing text size");
             totalPagesCount=0;
             actualPagesCount=0;
 			currentTextSize+=25;
 			[self updatePagination];
-            [self updateTextFontSizeWithValue:currentTextSize];
+            //[self updateTextFontSizeWithValue:currentTextSize];
             
 			if(currentTextSize == 200){
 				[incTextSizeButton setEnabled:NO];
@@ -640,7 +663,7 @@ int bookIndex;
             [self loadSpine:currentSpineIndex atPageIndex:currentPageInSpineIndex];
             /*QuickFix - Initialize the webView programatically... not done for first load and bounds were 0*/
             self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(20, 142, 728,811)];
-            self.webView.backgroundColor=UIColorFromRGB(MACRO_CODE_FOR_BG);
+            //self.webView.backgroundColor=UIColorFromRGB(MACRO_CODE_FOR_BG);
             [[loadedEpub.spineArray objectAtIndex:0] setDelegate:self];
             [[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
             //[currentPageLabel setText:@"?/?"];
@@ -1243,12 +1266,13 @@ int bookIndex;
     
     
     
-    NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+    /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+    int strPage = [self getActualPageCount];
     
-    int targetPage=[strPage intValue];
+    int targetPage=strPage;
     NSNumber *pageNumber=[NSNumber numberWithInt:targetPage];
     
-    
+    NSLog(@"Bookmark being added to dictionary-1 %d",strPage);
     NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc] initWithObjectsAndKeys:self.strBookName,@"bookName",[self getChapterNameOfBook],@"chapterName",strAnchorNodeContent,@"anchorNode",newText,@"highlightedText",[NSNumber numberWithInteger:currentPageInSpineIndex],@"PageIndexInSpine",[NSNumber numberWithInteger:currentSpineIndex],@"spineIndex",pageNumber, @"pageNumber", nil];
     
     [marr addObject:dictHighLightedTextInfo];
@@ -1344,13 +1368,20 @@ int bookIndex;
             }
             
             
-            NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
+            /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+            int strPage = [self getActualPageCount];
             
-            int targetPage=[strPage intValue];
+            int targetPage=strPage;
             NSNumber *pageNumber=[NSNumber numberWithInt:targetPage];
             
-            
-            NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc] initWithObjectsAndKeys:self.strBookName,@"bookName",[self getChapterNameOfBook],@"chapterName",[NSNumber numberWithInteger:currentPageInSpineIndex],@"PageIndexInSpine",[NSNumber numberWithInteger:currentSpineIndex],@"spineIndex",strContent,@"pageContent",pageNumber, @"pageNumber",nil];
+            NSLog(@"Bookmark being added to dictionary %d", strPage);
+            NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc]
+                                                   initWithObjectsAndKeys:self.strBookName,@"bookName",[self getChapterNameOfBook],
+                                                   @"chapterName",[NSNumber numberWithInteger:currentPageInSpineIndex],
+                                                   @"PageIndexInSpine",[NSNumber numberWithInteger:currentSpineIndex],
+                                                   @"spineIndex",strContent,
+                                                   @"pageContent",pageNumber,
+                                                   @"pageNumber",nil];
             [marr addObject:dictHighLightedTextInfo];
             [userDefaults setObject:marr forKey:@"bookMark"];
             
@@ -1364,15 +1395,6 @@ int bookIndex;
 
 
 -(NSString *)getChapterNameOfBook{
-    //    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
-    //
-    //
-    //    NSArray *arr=[html componentsSeparatedByString:@"\n"];
-    //
-    //    NSString *chapterName=@"";
-    //    if (arr.count>0) {
-    //        chapterName=arr[0];
-    //    }
     
     return [[loadedEpub.spineArray objectAtIndex:currentSpineIndex] title];
 }

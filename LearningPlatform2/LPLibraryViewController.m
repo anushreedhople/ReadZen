@@ -227,10 +227,14 @@ int buttonid=0;
     [query whereKey:@"bookid" equalTo:bookid];
     NSArray *objects = [query findObjects];
     NSString *weblink;
+    NSString *strBookname;
     for(PFObject *object in objects) {
         weblink = [object valueForKey:@"booksource"];
+        strBookname= [object valueForKey:@"bookname"];
     }
     
+    /*Set the book name*/
+    [epubViewController setStrBookName:strBookname];
     /*Set the tag of the book*/
     //[epubViewController setBookIndex:i];
     /*Set the weblink book source for copyright reasons*/
