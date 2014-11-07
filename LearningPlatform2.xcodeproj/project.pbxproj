@@ -190,7 +190,6 @@
 		4B911F0F199390A8002324C9 /* yellowslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowslide.png; path = ../yellowslide.png; sourceTree = "<group>"; };
 		4BA87DAA19B8594500A33DB7 /* GoogleOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleOAuth.h; path = ../GoogleOAuth.h; sourceTree = "<group>"; };
 		4BA87DAB19B8594500A33DB7 /* GoogleOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleOAuth.m; path = ../GoogleOAuth.m; sourceTree = "<group>"; };
-		4BB0A93E19B48514007923F1 /* kipling-jungle-book.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "kipling-jungle-book.epub"; path = "../kipling-jungle-book.epub"; sourceTree = "<group>"; };
 		4BBFD1C819B589CA00534A65 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
 		4BBFD1C919B589CA00534A65 /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		4BBFD1CA19B589CA00534A65 /* ChapterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterListViewController.h; sourceTree = "<group>"; };
@@ -388,7 +387,6 @@
 			children = (
 				4B911F0B199390A8002324C9 /* orangeslide.png */,
 				4B911F0C199390A8002324C9 /* SearchWebView.js */,
-				4BB0A93E19B48514007923F1 /* kipling-jungle-book.epub */,
 				4B911F0D199390A8002324C9 /* slider_ball.png */,
 				4B911F0E199390A8002324C9 /* vhugo.epub */,
 				4B911F0F199390A8002324C9 /* yellowslide.png */,

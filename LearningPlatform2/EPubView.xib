@@ -75,6 +75,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <connections>
                         <action selector="slidingEnded:" destination="-1" eventType="touchUpOutside" id="102"/>
+                        <action selector="slidingEnded:" destination="-1" eventType="touchUpInside" id="lgD-1s-r5G"/>
                         <action selector="slidingStarted:" destination="-1" eventType="valueChanged" id="97"/>
                     </connections>
                 </slider>

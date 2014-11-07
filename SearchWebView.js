@@ -13,7 +13,7 @@ function MyApp_HighlightAllOccurencesOfStringForElement(element,keyword) {
             while (true) {
                 var value = element.nodeValue;  // Search for keyword in text node
                 var idx = value.toLowerCase().indexOf(keyword);
-                                                
+                
                 if (idx < 0) break;             // not found, abort
                 
                 var span = document.createElement("highlight");
@@ -23,14 +23,14 @@ function MyApp_HighlightAllOccurencesOfStringForElement(element,keyword) {
                 
                 var rightText = document.createTextNode(value.substr(idx+keyword.length));
                 element.deleteData(idx, value.length - idx);
-                                
+                
                 var next = element.nextSibling;
                 element.parentNode.insertBefore(rightText, next);
                 element.parentNode.insertBefore(span, rightText);
                 
                 var leftNeighText = element.nodeValue.substr(element.length - neighSize, neighSize);
                 var rightNeighText = rightText.nodeValue.substr(0, neighSize);
-
+                
                 element = rightText;
                 MyApp_SearchResultCount++;	// update the counter
                 
@@ -51,6 +51,63 @@ function MyApp_HighlightAllOccurencesOfStringForElement(element,keyword) {
     }
 }
 
+
+
+
+function MyApp_HighlightAllOccurencesOfStringForElementBlue(element,keyword) {
+    if (element) {
+        if (element.nodeType == 3) {// Text node
+            while (true) {
+                var value = element.nodeValue;  // Search for keyword in text node
+                var idx = value.toLowerCase().indexOf(keyword);
+                
+                if (idx < 0) break;             // not found, abort
+                
+                var span = document.createElement("highlight");
+                span.className = "MyAppHighlight";
+                var text = document.createTextNode(value.substr(idx,keyword.length));
+                
+                span.appendChild(text);
+                
+                var rightText = document.createTextNode(value.substr(idx+keyword.length));
+                element.deleteData(idx, value.length - idx);
+                
+                var next = element.nextSibling;
+                element.parentNode.insertBefore(rightText, next);
+                element.parentNode.insertBefore(span, rightText);
+                
+                var leftNeighText = element.nodeValue.substr(element.length - neighSize, neighSize);
+                var rightNeighText = rightText.nodeValue.substr(0, neighSize);
+                
+                element = rightText;
+                MyApp_SearchResultCount++;	// update the counter
+                
+                console += "Span className: " + span.className + "\n";
+                console += "Span position: (" + getPos(span).x + ", " + getPos(span).y + ")\n";
+                
+                results += getPos(span).x + "," + getPos(span).y + "," + escape(leftNeighText + text.nodeValue + rightNeighText) + ";";
+                
+                
+                span.style.backgroundColor  = "yellow";
+                span.style.foregroundColor  = "white";
+                
+                
+                results;
+            }
+        } else if (element.nodeType == 1) { // Element node
+            if (element.style.display != "none" && element.nodeName.toLowerCase() != 'select') {
+                for (var i=element.childNodes.length-1; i>=0; i--) {
+                    MyApp_HighlightAllOccurencesOfStringForElementBlue(element.childNodes[i],keyword);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
 function getPos(el) {
     // yay readability
     for (var lx=0, ly=0; el != null; lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
@@ -62,6 +119,13 @@ function MyApp_HighlightAllOccurencesOfString(keyword) {
     MyApp_RemoveAllHighlights();
     MyApp_HighlightAllOccurencesOfStringForElement(document.body, keyword.toLowerCase());
 }
+
+function MyApp_HighlightAllOccurencesOfStringBlue(keyword) {
+    MyApp_RemoveAllHighlights();
+    MyApp_HighlightAllOccurencesOfStringForElementBlue(document.body, keyword.toLowerCase());
+}
+
+
 
 // helper function, recursively removes the highlights in elements and their childs
 function MyApp_RemoveAllHighlightsForElement(element) {
@@ -88,6 +152,93 @@ function MyApp_RemoveAllHighlightsForElement(element) {
     return false;
 }
 
+// the main entry point to remove the highlights
+function MyApp_RemoveAllHighlights() {
+    MyApp_SearchResultCount = 0;
+    MyApp_RemoveAllHighlightsForElement(document.body);
+}
+
+
+
+
+function stylizeHighlightedString(color) {
+    var range               = window.getSelection().getRangeAt(0);
+    var selectionContents   = range.extractContents();
+    var span                = document.createElement("span");
+    
+    span.appendChild(selectionContents);
+    span.id = "selc";
+    
+    span.setAttribute("class","uiWebviewHighlight");
+    span.style.backgroundColor  = color;
+    span.style.foregroundColor  = "black";
+    span.style.color            = "black";
+    
+    range.insertNode(span);
+}
+
+
+function stylizeButtonString(color) {
+    var range               = window.getSelection().getRangeAt(0);
+    var selectionContents   = range.extractContents();
+    var span                = document.createElement("span");
+    
+    span.appendChild(selectionContents);
+    span.id = "selc";
+    
+    span.setAttribute("class","uiWebviewHighlight");
+    span.style.backgroundColor  = color;
+    span.style.foregroundColor  = "black";
+    span.style.color            = "black";
+    
+    range.insertNode(span);
+}
+
+function getRectForSelectedText() {
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+    var rect = range.getBoundingClientRect();
+    return "{{" + rect.left + "," + rect.top + "}, {" + rect.width + "," + rect.height + "}}";
+}
+
+
+
+
+
+
+function getSelectionHTML()
+{
+    var userSelection;
+    if (window.getSelection)
+    {
+        // W3C Ranges
+        userSelection = window.getSelection ();
+        // Get the range:
+        if (userSelection.getRangeAt)
+            var range = userSelection.getRangeAt (0);
+        else
+        {
+            var range = document.createRange ();
+            range.setStart (userSelection.anchorNode, userSelection.anchorOffset);
+            range.setEnd (userSelection.focusNode, userSelection.focusOffset);
+        }
+        // And the HTML:
+        var clonedSelection = range.cloneContents ();
+        var div = document.createElement ('div');
+        div.appendChild (clonedSelection);
+        return div.innerHTML;
+    }
+    else if (document.selection)
+    {
+        // Explorer selection, return the HTML
+        userSelection = document.selection.createRange ();
+        return userSelection.htmlText;
+    }
+    else
+    {
+        return '';
+    }
+};
 // the main entry point to remove the highlights
 function MyApp_RemoveAllHighlights() {
     MyApp_SearchResultCount = 0;
