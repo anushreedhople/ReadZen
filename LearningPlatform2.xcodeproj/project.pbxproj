@@ -30,7 +30,6 @@
 		4B1C42FC1A09FDC100C51DDA /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C42EB1A09FDC100C51DDA /* brightness.png */; };
 		4B1C42FD1A09FDC100C51DDA /* chapter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C42EC1A09FDC100C51DDA /* chapter.png */; };
 		4B1C42FE1A09FDC100C51DDA /* glasses.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C42ED1A09FDC100C51DDA /* glasses.png */; };
-		4B1C42FF1A09FDC100C51DDA /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C42EE1A09FDC100C51DDA /* home.png */; };
 		4B1C43001A09FDC100C51DDA /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C42EF1A09FDC100C51DDA /* search.png */; };
 		4B1C43091A09FE6700C51DDA /* LPDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1C43041A09FE6700C51DDA /* LPDropViewController.m */; };
 		4B1C430A1A09FE6700C51DDA /* LPDropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1C43051A09FE6700C51DDA /* LPDropViewController.xib */; };
@@ -54,6 +53,7 @@
 		4B911F13199390A8002324C9 /* vhugo.epub in Resources */ = {isa = PBXBuildFile; fileRef = 4B911F0E199390A8002324C9 /* vhugo.epub */; };
 		4B911F14199390A8002324C9 /* yellowslide.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B911F0F199390A8002324C9 /* yellowslide.png */; };
 		4BA87DAC19B8594500A33DB7 /* GoogleOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA87DAB19B8594500A33DB7 /* GoogleOAuth.m */; };
+		4BB3D6A11A0E40100074D938 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BB3D6A01A0E40100074D938 /* home.png */; };
 		4BBFD1CF19B589CA00534A65 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD1C919B589CA00534A65 /* Chapter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BBFD1D019B589CA00534A65 /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD1CB19B589CA00534A65 /* ChapterListViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BBFD1D219B589CA00534A65 /* EPub.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFD1CE19B589CA00534A65 /* EPub.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -150,7 +150,6 @@
 		4B1C42EB1A09FDC100C51DDA /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
 		4B1C42EC1A09FDC100C51DDA /* chapter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chapter.png; sourceTree = "<group>"; };
 		4B1C42ED1A09FDC100C51DDA /* glasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glasses.png; sourceTree = "<group>"; };
-		4B1C42EE1A09FDC100C51DDA /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		4B1C42EF1A09FDC100C51DDA /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		4B1C43021A09FDD800C51DDA /* LPMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPMacro.h; sourceTree = "<group>"; };
 		4B1C43031A09FE6700C51DDA /* LPDropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDropViewController.h; sourceTree = "<group>"; };
@@ -190,6 +189,7 @@
 		4B911F0F199390A8002324C9 /* yellowslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowslide.png; path = ../yellowslide.png; sourceTree = "<group>"; };
 		4BA87DAA19B8594500A33DB7 /* GoogleOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleOAuth.h; path = ../GoogleOAuth.h; sourceTree = "<group>"; };
 		4BA87DAB19B8594500A33DB7 /* GoogleOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleOAuth.m; path = ../GoogleOAuth.m; sourceTree = "<group>"; };
+		4BB3D6A01A0E40100074D938 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		4BBFD1C819B589CA00534A65 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
 		4BBFD1C919B589CA00534A65 /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		4BBFD1CA19B589CA00534A65 /* ChapterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterListViewController.h; sourceTree = "<group>"; };
@@ -353,6 +353,7 @@
 		4B1C42DE1A09FDB100C51DDA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4BB3D6A01A0E40100074D938 /* home.png */,
 				4B1C42DF1A09FDC100C51DDA /* delete.png */,
 				4B1C42E01A09FDC100C51DDA /* highlight.png */,
 				4B1C42E11A09FDC100C51DDA /* mail.png */,
@@ -368,7 +369,6 @@
 				4B1C42EB1A09FDC100C51DDA /* brightness.png */,
 				4B1C42EC1A09FDC100C51DDA /* chapter.png */,
 				4B1C42ED1A09FDC100C51DDA /* glasses.png */,
-				4B1C42EE1A09FDC100C51DDA /* home.png */,
 				4B1C42EF1A09FDC100C51DDA /* search.png */,
 			);
 			name = Images;
@@ -789,6 +789,7 @@
 				4B1C42FB1A09FDC100C51DDA /* bookmark.png in Resources */,
 				4B911F10199390A8002324C9 /* orangeslide.png in Resources */,
 				4B1C42FD1A09FDC100C51DDA /* chapter.png in Resources */,
+				4BB3D6A11A0E40100074D938 /* home.png in Resources */,
 				4B1C431A1A0A310C00C51DDA /* EPubView.xib in Resources */,
 				4B911F11199390A8002324C9 /* SearchWebView.js in Resources */,
 				4B1C42F01A09FDC100C51DDA /* delete.png in Resources */,
@@ -805,7 +806,6 @@
 				4B1C42F41A09FDC100C51DDA /* notes.png in Resources */,
 				4BE34E98197C751B00587A1A /* Main.storyboard in Resources */,
 				4B1C43181A0A30D200C51DDA /* ChapterListViewController.xib in Resources */,
-				4B1C42FF1A09FDC100C51DDA /* home.png in Resources */,
 				4B1C42FA1A09FDC100C51DDA /* book.png in Resources */,
 				4B1C42F11A09FDC100C51DDA /* highlight.png in Resources */,
 				4BE34E6D197C73BD00587A1A /* InfoPlist.strings in Resources */,

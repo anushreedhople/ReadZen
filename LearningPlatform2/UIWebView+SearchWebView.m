@@ -1,5 +1,17 @@
 @implementation UIWebView (SearchWebView)
 
+- (NSInteger)highlightOccurencesOfAllStrings:(NSString*)str {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];
+    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    [self stringByEvaluatingJavaScriptFromString:jsCode];
+    
+    NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightOccurrencesOfAllStrings('%@');",str];
+    [self stringByEvaluatingJavaScriptFromString:startSearch];
+    
+    return [[self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount;"] intValue];
+}
+
 - (NSInteger)highlightAllOccurencesOfString:(NSString*)str {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];
     NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
@@ -8,7 +20,6 @@
     NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightAllOccurencesOfString('%@');",str];
     [self stringByEvaluatingJavaScriptFromString:startSearch];
     
-    //    NSLog(@"%@", [self stringByEvaluatingJavaScriptFromString:@"console"]);
     return [[self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount;"] intValue];
 }
 
@@ -29,6 +40,7 @@
 
 
 - (void)removeAllHighlights {
+    NSLog(@"Remove all highlights is called------");
     [self stringByEvaluatingJavaScriptFromString:@"MyApp_RemoveAllHighlights()"];
 }
 

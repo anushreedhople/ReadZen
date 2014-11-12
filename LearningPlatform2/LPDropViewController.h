@@ -14,14 +14,14 @@
 -(void) decreaseFontSize;
 -(void) restoreToDefault;
 
-
 @end
 
-@interface LPDropViewController : UIViewController {
+@interface LPDropViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     
-    
-    
+    NSMutableArray *metricTitles;
+    NSMutableArray *readingMetrics;
 }
+
 @property (assign, nonatomic) id<environmentChange>  delegate;
 @property (weak, nonatomic) IBOutlet UIButton *restoreToDefault;
 @property (weak, nonatomic) IBOutlet UISlider *m_sliderBrightness;
@@ -35,5 +35,10 @@
 - (IBAction)contrastValueChanged:(id)sender;
 @property (strong, nonatomic) IBOutlet UIView *m_vwBrightness;
 - (IBAction)contrast1:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIView *m_vwMetrics;
+@property (strong, nonatomic) IBOutlet UITableView *tableMetrics;
+
+- (void) setBookIndex:(int)bookIndex;
 
 @end

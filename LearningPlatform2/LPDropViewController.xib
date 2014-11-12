@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPDropViewController">
@@ -11,8 +11,10 @@
                 <outlet property="increaseFont" destination="hTW-h1-o1m" id="bF1-fa-w7G"/>
                 <outlet property="m_sliderBrightness" destination="Dru-eU-rfy" id="IhY-iO-FY3"/>
                 <outlet property="m_vwBrightness" destination="TEn-Mf-9bI" id="Pw9-Qk-TsV"/>
+                <outlet property="m_vwMetrics" destination="pjj-j8-ZZm" id="9Qp-dP-8pQ"/>
                 <outlet property="m_vwTextSize" destination="hsb-Bl-Q8I" id="piq-PH-hfW"/>
                 <outlet property="restoreToDefault" destination="T9w-OW-ZgL" id="Mk2-IK-aDD"/>
+                <outlet property="tableMetrics" destination="PfM-Af-Agb" id="sDg-gl-bZH"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -49,7 +51,25 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.88627457618713379" green="0.86274516582489014" blue="0.83137261867523193" alpha="1" colorSpace="deviceRGB"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
+                <view tag="103" contentMode="scaleToFill" id="pjj-j8-ZZm">
+                    <rect key="frame" x="140" y="0.0" width="500" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="D7f-8n-ZEB">
+                            <rect key="frame" x="10" y="15" width="437" height="172"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PfM-Af-Agb">
+                                    <rect key="frame" x="19" y="0.0" width="437" height="172"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </tableView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.88235300780000003" green="0.85490202900000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.88627457620000005" green="0.86274516580000005" blue="0.83137261870000001" alpha="1" colorSpace="deviceRGB"/>
                 </view>
                 <view tag="102" contentMode="scaleToFill" id="hsb-Bl-Q8I">
                     <rect key="frame" x="211" y="0.0" width="324" height="120"/>
@@ -100,15 +120,18 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90196084976196289" green="0.87450987100601196" blue="0.84705889225006104" alpha="1" colorSpace="deviceRGB"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
         <image name="brightness.png" width="30" height="30"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

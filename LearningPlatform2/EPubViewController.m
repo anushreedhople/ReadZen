@@ -56,10 +56,10 @@ int bookIndex;
     self.loadedEpub = [[EPub alloc] initWithEPubPath:[epubURL path]];
     epubLoaded = YES;
 	[self updatePagination];
-    /*readingMetric = [[ReadingMetric alloc]init];
+    readingMetric = [[ReadingMetric alloc]init];
     [readingMetric setBookIndex:bookIndex];
     [readingMetric bookIsOpened:[NSDate date]];
-    [readingMetric setTotalPages:[self getGlobalPageCount]];*/
+    [readingMetric setTotalPages:[self getActualPageCount]];
 }
 
 
@@ -103,7 +103,7 @@ int bookIndex;
 	}
 }
 
-/*
+
 -(void)storeCurrentPageNo {
     
     NSMutableArray *spineIndex = [[NSMutableArray alloc] init];
@@ -112,8 +112,8 @@ int bookIndex;
     [spineIndex addObjectsFromArray:[[PFUser currentUser] valueForKey:@"spineindex"]];
     [pageIndex addObjectsFromArray:[[PFUser currentUser] valueForKey:@"pageindex"]];
     
-    [spineIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d",currentSpineIndex]];
-    [pageIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d", currentPageInSpineIndex]];
+    //[spineIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d",currentSpineIndex]];
+    //[pageIndex replaceObjectAtIndex:bookIndex withObject:[NSString stringWithFormat:@"%d", currentPageInSpineIndex]];
     
     //Add it to the Parse PFUser database
     PFUser *user = [PFUser currentUser];
@@ -122,13 +122,13 @@ int bookIndex;
     //[[PFUser currentUser] saveInBackground];
 
 }
-*/
 
-/*
+
+
 -(void)setBookIndex:(int)receivedBookIndex{
     bookIndex = receivedBookIndex;
 }
-*/
+
 
 - (int) getGlobalPageCount{
 	int pageCount = 0;
@@ -173,14 +173,10 @@ int bookIndex;
     [searchResultsPopover dismissPopoverAnimated:YES];
     
     for (Chapter *chapter in loadedEpub.spineArray) {
-        //NSLog(@"chapter title %@",chapter.title);
-        //NSLog(@"strTitle %@",strTitle);
         
         if ([[chapter.title lowercaseString] isEqualToString:[strTitle lowercaseString]]) {
-            //NSLog(@"chapter-----------------------");
             
             NSURL* url = [NSURL fileURLWithPath:[[loadedEpub.spineArray objectAtIndex:iSpineIndex++] spinePath]];
-            //NSLog(@"The url is %@",url);
             NSString *str=[[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
             
             NSString *loadString = [NSString stringWithFormat:@"<html><head><style>body {background:#F2EBE4} p {color:black;}</style></head><body><p>%@<p></body></html>", str];
@@ -196,12 +192,6 @@ int bookIndex;
                 [currentPageLabel setText:[NSString stringWithFormat:@"Page %d of %d   Loc %d of %d",[self getActualPageCount], actualPagesCount, [self getGlobalPageCount], totalPagesCount]];
                 [pageSlider setValue:(float)100*(float)[self getGlobalPageCount]/(float)totalPagesCount animated:YES];
             }
-            
-            /*change pagesInCurrentSpineIndex variable also*/
-            /*int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
-            pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
-            NSLog(@"loadSpine totalWidth:%d webView width %f", totalWidth, webView.bounds.size.width);*/
-            
             
             webView.hidden=NO;
             
@@ -223,17 +213,13 @@ int bookIndex;
 	[searchResultsPopover dismissPopoverAnimated:YES];
 	
 	NSURL* url = [NSURL fileURLWithPath:[[loadedEpub.spineArray objectAtIndex:spineIndex] spinePath]];
-    //NSLog(@"The url is %@",url);
-    //NSString *str=[[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSString *str=[[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     
-    //NSString *loadString = [NSString stringWithFormat:@"<html><head><style>body {background:#F2EBE4} p {color:black;}</style></head><body><p>%@<p></body></html>", str];
+    NSString *loadString = [NSString stringWithFormat:@"<html><head><style>body {background:#F2EBE4} p {color:black;}</style></head><body><p>%@<p></body></html>", str];
     
-    //[webView loadHTMLString:loadString baseURL:nil];
-    [webView loadRequest:[NSURLRequest requestWithURL:url]];
+    [webView loadHTMLString:loadString baseURL:nil];
     
-    //	[webView loadRequest:[NSURLRequest requestWithURL:url]];
 	currentPageInSpineIndex = pageIndex;
-    NSLog(@"loadSpine highlightSearchResult currentPageInSpineIndex: %d", currentPageInSpineIndex);
 	currentSpineIndex = spineIndex;
     
     
@@ -241,18 +227,11 @@ int bookIndex;
 		[currentPageLabel setText:[NSString stringWithFormat:@"Page %d of %d   Loc %d of %d",[self getActualPageCount], actualPagesCount, [self getGlobalPageCount], totalPagesCount]];
 		[pageSlider setValue:(float)100*(float)[self getGlobalPageCount]/(float)totalPagesCount animated:YES];	
 	}
-    
-    NSLog(@"The scrollWidth is %d", [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue]);
-    
-    
-    /*change pagesInCurrentSpineIndex variable also*/
-	/*int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
-	pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
-    */
 
     webView.hidden=NO;
     
-    /*if ([theResult isKindOfClass:[NSString class]]) {
+    
+    if ([theResult isKindOfClass:[NSString class]]) {
         NSString *strHighlight=(NSString *)theResult;
         [self.webView highlightString:strHighlight];
         
@@ -260,7 +239,7 @@ int bookIndex;
         NSString *strHighlight=theResult.originatingQuery;
         [self.webView highlightAllOccurencesOfString:strHighlight];
         
-    }*/
+    }
 }
 
 - (void) gotoPageInCurrentSpine:(int)pageIndex{
@@ -306,25 +285,31 @@ int bookIndex;
 
 - (void) gotoNextPage {
 
-    //[readingMetric pagescroll:[NSDate date]];
-    //NSLog(@"Goto next page is called");
+    /*Identify if actual page is scrolled... then call pagescroll for reading metric*/
+    int currentPage = [self getActualPageCount];
     
 	if(!paginating){
-        NSLog(@"gotoNextPage currentPageInSpineIndex %d  pagesInCurrentSpineCount %d", currentPageInSpineIndex, pagesInCurrentSpineCount);
+        
 		if(currentPageInSpineIndex+1<pagesInCurrentSpineCount){
-            //NSLog(@"gotoPageInCurrentSpine called");
 			[self gotoPageInCurrentSpine:++currentPageInSpineIndex];
 		} else {
-            //NSLog(@"Goto next spine is called");
 			[self gotoNextSpine];
 		}
+        if(currentPage == [self getActualPageCount]){
+            /*Do nothing. The actual page count has not changed*/
+        }
+        else {
+            [readingMetric pagescroll:[NSDate date]];
+        }
         [self checkForBookMarkAndShowIcon:2];
 	}
 }
 
 - (void) gotoPrevPage {
     
-    //[readingMetric pagescroll:[NSDate date]];
+    int currentPage = [self getActualPageCount];
+    NSLog(@"The current page is %d", [self getActualPageCount]);
+    
 	if (!paginating) {
 		if(currentPageInSpineIndex-1>=0){
 			[self gotoPageInCurrentSpine:--currentPageInSpineIndex];
@@ -334,6 +319,13 @@ int bookIndex;
 				[self loadSpine:--currentSpineIndex atPageIndex:targetPage-1];
 			}
 		}
+        
+        if(currentPage == [self getActualPageCount]) {
+            NSLog(@"The new page count is now %d", [self getActualPageCount]);
+        }
+        else {
+            [readingMetric pagescroll:[NSDate date]];
+        }
         [self checkForBookMarkAndShowIcon:1];
 	}
 }
@@ -436,52 +428,21 @@ int bookIndex;
                         //NSLog(@"Dictionary chaptername: %@ strChapterName: %@", [dict objectForKey:@"chapterName"], [self getChapterNameOfBook]);
                         
                         if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:[self getChapterNameOfBook]]) {
-                            
-                            //NSLog(@"Conditions matched");
-                            
-                            /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
+                    
                             int strPage = [self getActualPageCount];
                             
                             if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
-                                //NSLog(@"Setting bookmark 12-2");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
                                 break;
                             }else{
-                                //NSLog(@"Setting bookmark-2");
                                 [_btnBookMark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
                             }
                         }
                     }
                 }
                 else{
-                    //NSLog(@"Code is 1");
-                    //chapter 22 to 21 move
-                    //chap 21 final pageindex is book mark so that chapter 22 page 0 will not be bookmark
-                    //                    if (pagesInCurrentSpineCount+1==currentPageInSpineIndex-1 || pagesInCurrentSpineCount == currentPageInSpineIndex|| pagesInCurrentSpineCount+1== currentPageInSpineIndex) {
-                    //
-                    //                            int iIndex=[self getIndexOfChapter:[self getChapterNameOfBook]];
-                    //                            NSString *strChapter=[[self.loadedEpub.spineArray objectAtIndex:--iIndex] title] ;
-                    //
-                    //                            if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:strChapter] ){
-                    //                                NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];
-                    //
-                    //                                if ([[dict objectForKey:@"pageNumber"] intValue] == [strPage intValue]) {
-                    //                                    [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
-                    //                                    break;
-                    //                                }else{
-                    //                                    [_btnBookMark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
-                    //                                }
-                    //
-                    //                            }
-                    //
-                    //
-                    //                    }
-                    //                    else
-                    //
-                    //                    {
-                    if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:[self getChapterNameOfBook]]) {
+                                        if ([[dict objectForKey:@"bookName"] isEqualToString:self.strBookName] && [[dict objectForKey:@"chapterName"] isEqualToString:[self getChapterNameOfBook]]) {
                         
-                        /*NSString *strPage=[self.currentPageLabel.text componentsSeparatedByString:@"/"][0];*/
                         int strPage = [self getActualPageCount];
                         
                         if ([[dict objectForKey:@"pageNumber"] intValue] == strPage) {
@@ -629,8 +590,6 @@ int bookIndex;
 	
 	int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
 	pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
-    NSLog(@"totalWidth: %d webView width: %d", totalWidth, webView.bounds.size.width);
-    NSLog(@"webViewDidFinishLoad pagesInCurrentSpineCount:%d", pagesInCurrentSpineCount);
 
 	[self gotoPageInCurrentSpine:currentPageInSpineIndex];
     
@@ -639,19 +598,36 @@ int bookIndex;
     //check if the book name is found in nsuserdefault
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
+    //NSLog(@"Checking for highlighted text");
+    
     for (NSDictionary *dict in [userDefaults objectForKey:@"highlightedTextData"]) {
         if ([dict objectForKey:@"bookName"]) {
             if ([[dict objectForKey:@"bookName"]isEqualToString:self.strBookName]) {
                 NSString *strCurrentChapterName=[self getChapterNameOfBook];
                 if ([strCurrentChapterName isEqualToString:[dict objectForKey:@"chapterName"]]) {
-                    
+                    //NSLog(@"Chapter & Book  matched... going to highlight now....");
                     //search for the string and then highlight
-                    [theWebView highlightAllOccurencesOfString:[dict objectForKey:@"highlightedText"]];
-                    
+                    NSLog(@"The text to be highlighted is --- %@", [dict objectForKey:@"highlightedText"]);
+                    [theWebView highlightOccurencesOfAllStrings:[dict objectForKey:@"highlightedText"]];
                 }
             }
         }
     }
+    
+    //NSLog(@"Checking for notes text");
+    for (NSDictionary *dict in [userDefaults objectForKey:@"notesTextData"]) {
+        if ([dict objectForKey:@"bookName"]) {
+            if ([[dict objectForKey:@"bookName"]isEqualToString:self.strBookName]) {
+                NSString *strCurrentChapterName=[self getChapterNameOfBook];
+                if ([strCurrentChapterName isEqualToString:[dict objectForKey:@"chapterName"]]) {
+                    //search for the string and then highlight
+                    NSLog(@"The text to be highlighted is --- %@", [dict objectForKey:@"highlightedText"]);
+                    [theWebView highlightOccurencesOfAllStrings:[dict objectForKey:@"highlightedText"]];
+                }
+            }
+        }
+    }
+    
 }
 
 - (void) updatePagination{
@@ -660,7 +636,6 @@ int bookIndex;
             paginating = YES;
             totalPagesCount=0;
             [self loadSpine:currentSpineIndex atPageIndex:currentPageInSpineIndex];
-            //NSLog(@"CurrentSpineIndex %d currentPageInSpineIndex %d", currentSpineIndex, currentPageInSpineIndex);
             if(self.webView.bounds.size.width == 0){
                 /*QuickFix - Initialize the webView programatically... not done for first load and bounds were 0*/
                 self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(20, 142, 728,811)];
@@ -669,7 +644,6 @@ int bookIndex;
             //self.webView.backgroundColor=UIColorFromRGB(MACRO_CODE_FOR_BG);
             [[loadedEpub.spineArray objectAtIndex:0] setDelegate:self];
             [[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
-            //[currentPageLabel setText:@"?/?"];
         }
 	}
     self.webView.hidden=NO;
@@ -719,7 +693,6 @@ int bookIndex;
     NSString *sampleText =  [UIPasteboard generalPasteboard].string;
     
     NSString *newText = [self.webView stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
-    //NSLog(@"Save button is selected and string selected is text: %@ and newText %@ and sampleText %@", text, newText, sampleText);
     
 }
 
@@ -902,14 +875,6 @@ int bookIndex;
     self.navigationController.navigationBar.hidden=YES;
 }
 
-/*
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-*/
 
 - (void)dealloc {
     self.toolbar = nil;
@@ -931,8 +896,8 @@ int bookIndex;
 {
     if (![parent isEqual:self.parentViewController]) {
         /*Back button is pressed. Save the current page number */
-        //[self storeCurrentPageNo];
-        //[readingMetric bookIsClosed:[NSDate date]];
+        [self storeCurrentPageNo];
+        [readingMetric bookIsClosed:[NSDate date]];
     }
 }
 
@@ -992,8 +957,43 @@ int bookIndex;
 - (IBAction)showChapterList:(id)sender {
 }
 - (IBAction)showReadingMetric:(id)sender {
+
+    
+
+    
 }
+
 - (IBAction)takeToBookMarkPage:(id)sender {
+    
+    
+    NSLog(@"Show reading metric is called");
+    [m_objDropViewController.view removeFromSuperview];
+    m_objDropViewController.delegate=nil;
+    
+    m_objDropViewController=nil;
+    
+    if (m_objDropViewController==nil) {
+        m_objDropViewController=[[LPDropViewController alloc] initWithNibName:NSStringFromClass([LPDropViewController class]) bundle:nil];
+        /*set the bookindex*/
+        [m_objDropViewController setBookIndex:bookIndex];
+        m_objDropViewController.delegate=self;
+    }
+    
+    
+    m_objDropViewController.iViewName=E_Metrics;
+    m_objDropViewController.view.frame=CGRectMake(0, self.view.frame.size.height*-1, self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:m_objDropViewController.view];
+    
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        m_objDropViewController.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        m_objDropViewController.view.alpha=0.5;
+    } completion:^(BOOL finished) {
+        m_objDropViewController.view.alpha=1.0;
+        
+    }];
+    
 }
 
 - (IBAction)fontSizeChanged:(id)sender {
@@ -1036,59 +1036,11 @@ int bookIndex;
     
     if (m_objDropViewController.iViewName == E_TextSize) {
         //Do nothing as it is already done
-        //        CGRect frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y - m_objDropViewController.view.frame.size.height, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-        
-        
-        //        if (m_objDropViewController.view.frame.origin.y==frame.origin.y) {
-        //
-        //            frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-        //
-        //            [UIView animateWithDuration:0.3 animations:^{
-        //                m_objDropViewController.view.frame=frame;
-        //                m_objDropViewController.view.alpha=0.5;
-        //            } completion:^(BOOL finished) {
-        //                m_objDropViewController.view.alpha=1.0;
-        //
-        //            }];
-        //
-        //        }else{
-        //
-        //
-        //            [UIView animateWithDuration:0.3 animations:^{
-        //                m_objDropViewController.view.frame=frame;
-        //            } completion:^(BOOL finished) {
-        //                m_objDropViewController.view.alpha=1.0;
-        //
-        //            }];
-        //        }
-        //
         
         
     }else{
-        
-        
         m_objDropViewController.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         
-        
-        //        m_objDropViewController.view.frame=m_objDropViewController.m_vwTextSize.frame;
-        
-        //
-        //        CGRect frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y - m_objDropViewController.view.frame.size.height, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-        //        m_objDropViewController.view.frame=frame;
-        //        m_objDropViewController.view.alpha=0.5;
-        //
-        //        [self.view addSubview:m_objDropViewController.view];
-        //
-        //
-        //        frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-        //
-        //        [UIView animateWithDuration:0.3 animations:^{
-        //            m_objDropViewController.view.frame=frame;
-        //            m_objDropViewController.view.alpha=0.5;
-        //        } completion:^(BOOL finished) {
-        //            m_objDropViewController.view.alpha=1.0;
-        //
-        //        }];
     }
     
 }
@@ -1110,6 +1062,7 @@ int bookIndex;
 }
 
 
+
 - (IBAction)adjustBrightness:(id)sender{
     
     [m_objDropViewController.view removeFromSuperview];
@@ -1128,10 +1081,7 @@ int bookIndex;
     [self.view addSubview:m_objDropViewController.view];
     
     
-    
-    
-    
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         m_objDropViewController.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         m_objDropViewController.view.alpha=0.5;
@@ -1139,61 +1089,6 @@ int bookIndex;
         m_objDropViewController.view.alpha=1.0;
         
     }];
-    
-    
-    
-    
-    //    if (m_objDropViewController.iViewName == E_BrightNess) {
-    //Do nothing as it is already done
-    //        CGRect frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y - m_objDropViewController.view.frame.size.height, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-    
-    
-    //        if (m_objDropViewController.view.frame.origin.y==frame.origin.y) {
-    //
-    //            frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-    //
-    //            [UIView animateWithDuration:0.3 animations:^{
-    //                m_objDropViewController.view.frame=frame;
-    //                m_objDropViewController.view.alpha=0.5;
-    //            } completion:^(BOOL finished) {
-    //                m_objDropViewController.view.alpha=1.0;
-    //
-    //            }];
-    //
-    //        }else{
-    //
-    //
-    //            [UIView animateWithDuration:0.3 animations:^{
-    //                m_objDropViewController.view.frame=frame;
-    //            } completion:^(BOOL finished) {
-    //                m_objDropViewController.view.alpha=1.0;
-    //
-    //            }];
-    //        }
-    //
-    //
-    //
-    //    }else{
-    //
-    //        m_objDropViewController.iViewName=E_BrightNess;
-    //
-    //        CGRect frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y - m_objDropViewController.view.frame.size.height, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-    //        m_objDropViewController.view.frame=frame;
-    //        m_objDropViewController.view.alpha=0.5;
-    //
-    //        [self.view addSubview:m_objDropViewController.view];
-    //
-    //
-    //        frame=CGRectMake(self.view.center.x - m_objDropViewController.view.frame.size.width/2, self.view.frame.origin.y, m_objDropViewController.view.frame.size.width, m_objDropViewController.view.frame.size.height);
-    //
-    //        [UIView animateWithDuration:0.3 animations:^{
-    //            m_objDropViewController.view.frame=frame;
-    //            m_objDropViewController.view.alpha=0.5;
-    //        } completion:^(BOOL finished) {
-    //            m_objDropViewController.view.alpha=1.0;
-    //
-    //        }];
-    //    }
     
 }
 
@@ -1239,17 +1134,11 @@ int bookIndex;
 #pragma mark HighLighting
 
 -(void)highLightAction:(id)sender{
+    
+    NSLog(@"Highlight button is clicked");
+    
     NSString *newText = [self.webView stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
-    
-    //    NSLog(@"htmlString %@",[self.webView getHTML]);
-    //
-    //    NSLog(@"%@",[self.webView stringByEvaluatingJavaScriptFromString:@"(window.getSelection()).anchorNode.nextSibling.textContent"]);
-    //
-    //    NSLog(@"%@",[webView stringByEvaluatingJavaScriptFromString:@"(window.getSelection()).anchorNode.textContent"]);
-    //
-    //    NSLog(@"%@",[webView stringByEvaluatingJavaScriptFromString:@"(window.getSelection()).anchorNode.anchorNode.textContent"]);
-    
-    
+
     
     NSString *strAnchorNodeContent=[webView stringByEvaluatingJavaScriptFromString:@"(window.getSelection()).anchorNode.textContent"];
     
@@ -1276,7 +1165,6 @@ int bookIndex;
     int targetPage=strPage;
     NSNumber *pageNumber=[NSNumber numberWithInt:targetPage];
     
-    //NSLog(@"Bookmark being added to dictionary-1 %d",strPage);
     NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc] initWithObjectsAndKeys:self.strBookName,@"bookName",[self getChapterNameOfBook],@"chapterName",strAnchorNodeContent,@"anchorNode",newText,@"highlightedText",[NSNumber numberWithInteger:currentPageInSpineIndex],@"PageIndexInSpine",[NSNumber numberWithInteger:currentSpineIndex],@"spineIndex",pageNumber, @"pageNumber", nil];
     
     [marr addObject:dictHighLightedTextInfo];
@@ -1293,17 +1181,6 @@ int bookIndex;
 - (IBAction)showBookMarks:(id)sender{
     
     
-    //    self.m_vwBookMark.hidden=NO;
-    //
-    //    [UIView animateWithDuration:0.2 animations:^{
-    //        self.m_vwBookMark.frame=CGRectMake(self.m_vwBookMark.frame.origin.x, 50, self.m_vwBookMark.frame.size.width, 100);
-    //
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
-    //
-    //    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];//may be `"document.body.innerText;"`
-    
     NSString *body = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('calibre1')"];
     
     NSString *strTextContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
@@ -1311,23 +1188,6 @@ int bookIndex;
     
     NSArray *arr=[strTextContent componentsSeparatedByString:@"<p class=\"calibre1\">"];
     
-    /*
-     //HTML PARSER
-     
-     TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:[strTextContent dataUsingEncoding:NSUTF8StringEncoding]];
-     
-     NSString *tutorialsXpathQueryString = @"//p[@class='calibre1']";
-     NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
-     
-     NSMutableArray *newTutorials = [[NSMutableArray alloc] initWithCapacity:0];
-     for (TFHppleElement *element in tutorialsNodes) {
-     Tutorial *tutorial = [[Tutorial alloc] init];
-     [newTutorials addObject:tutorial];
-     tutorial.title = [[element firstChild] content];
-     tutorial.url = [element objectForKey:@"calibre1"];
-     }
-     
-     */
     
     [_btnBookMark setImage:[UIImage imageNamed:@"bookmark12"] forState:UIControlStateNormal];
     
@@ -1378,7 +1238,6 @@ int bookIndex;
             int targetPage=strPage;
             NSNumber *pageNumber=[NSNumber numberWithInt:targetPage];
             
-            //NSLog(@"Bookmark being added to dictionary %d", strPage);
             NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc]
                                                    initWithObjectsAndKeys:self.strBookName,@"bookName",[self getChapterNameOfBook],
                                                    @"chapterName",[NSNumber numberWithInteger:currentPageInSpineIndex],
@@ -1483,7 +1342,6 @@ int bookIndex;
     
     
     [self.webView highlightButtonString:strTextToBeSelected withColor:@"yellow"];
-    //    [self.webView highlightString:strTextToBeSelected withColor:@"pink"];
     
     m_objNotesViewController=[[LPNotesViewController alloc] initWithNibName:NSStringFromClass([LPNotesViewController class]) bundle:nil];
     m_objNotesViewController.m_strBookName=[NSString stringWithFormat:@"%@",self.strBookName];
@@ -1491,6 +1349,8 @@ int bookIndex;
     
     
     m_objNotesViewController.m_strHighlighted = strTextToBeSelected;
+    m_objNotesViewController.m_strPageIndexInSpine = currentPageInSpineIndex;
+    
     
     m_objNotesViewController.m_strAnchorNodeContent=[webView stringByEvaluatingJavaScriptFromString:@"(window.getSelection()).anchorNode.textContent"];
     

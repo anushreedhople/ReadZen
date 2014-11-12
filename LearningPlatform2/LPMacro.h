@@ -1,6 +1,7 @@
 enum{
     E_BrightNess=100,
-    E_TextSize
+    E_TextSize,
+    E_Metrics
 };
 
 

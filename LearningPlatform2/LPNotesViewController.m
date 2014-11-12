@@ -60,11 +60,21 @@
  }
 
 -(void)saveTextInDefaults{
+    
+    NSLog(@"Save note is called");
+    NSLog(@"The anchor note content is %@", self.m_strAnchorNodeContent);
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableArray *marr=[[NSMutableArray alloc] init];
     
-    NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc] initWithObjectsAndKeys:self.m_strBookName,@"bookName",self.m_strChapterName,@"chapterName",self.m_txtView.text,@"notesText",self.m_strAnchorNodeContent,@"anchorNode",self.m_strHighlighted,@"highlightedText", nil];
+    NSDictionary *dictHighLightedTextInfo=[[NSDictionary alloc] initWithObjectsAndKeys:self.m_strBookName,
+                                           @"bookName",self.m_strChapterName,
+                                           @"chapterName",self.m_txtView.text,
+                                           @"notesText",self.m_strAnchorNodeContent,
+                                           @"anchorNode",self.m_strHighlighted,
+                                           @"PageIndexInSpine", self.m_strPageIndexInSpine,
+                                           @"highlightedText", nil];
 
     if ([userDefaults objectForKey:@"notesTextData"]) {
         if ([[userDefaults objectForKey:@"notesTextData"] isKindOfClass:[NSArray class]]) {
@@ -76,7 +86,6 @@
             }
         }
     }
-    
     
     
     [marr addObject:dictHighLightedTextInfo];
@@ -122,12 +131,6 @@
         ((UITextView*)txtNoteView).text=@"";
     }
 }
-
-
-
-
-
-
 
 
 -(void)dealloc{

@@ -48,35 +48,23 @@
     
     iTableLoad=TABLE_CHAPTER;
     
-    
-    
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     marrBookMarkData=[[NSMutableArray alloc] init];
-    
     marrHighlightData=[[NSMutableArray alloc] init];
-    
     marrNotesData=[[NSMutableArray alloc] init];
     
     
     if ([userDefaults objectForKey:@"bookMark"]) {
         if ([[userDefaults objectForKey:@"bookMark"] isKindOfClass:[NSArray class]]) {
             for (NSDictionary *dict in [userDefaults objectForKey:@"bookMark"]) {
-                
-                
                 if ([[dict objectForKey:@"bookName"]isEqualToString:self.m_lblBookName.text]) {
                     [marrBookMarkData addObject:dict];
                     
                 }
-                
-                
             }
         }
     }
-    
-    
-    
     
     
     if ([userDefaults objectForKey:@"notesTextData"]) {
@@ -89,11 +77,6 @@
             }
         }
     }
-    
-    
-    
-    
-    
     
     
     if ([userDefaults objectForKey:@"highlightedTextData"]) {
@@ -457,19 +440,21 @@
         dict=marrHighlightData[indexPath.row];
         NSNumber *numPageIndex=[dict objectForKey:@"PageIndexInSpine"];
         NSString *str1=[dict objectForKey:@"chapterName"];
-        //        NSString *str=[str1 stringByReplacingOccurrencesOfString:@"Chapter" withString:@""];
         
         int IChap=[self getIndexOfChapter:str1];
-        [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
+        
+        NSString *strHighLight=[dict objectForKey:@"highlightedText"];
+        if(strHighLight) {
+            [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
+        }
         
         
-        NSString *strHighLight=dict[@"highlightedText"];
+        /*NSString *strHighLight=[dict objectForKey:@"highlightedText"];
+        NSLog(@"The highlighted text is %@", strHighLight);
         
         if (strHighLight) {
             if (![strHighLight isKindOfClass:[NSNull class]]) {
-                [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue]highlightSearchResult:dict[@"highlightedText"]];
-                
-                //                [epubViewController.webView highlightAllOccurencesOfStringInBlue:dict[@"highlightedText"]];
+                [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue]highlightSearchResult:[dict objectForKey:@"highlightedText"]];
             }else{
                 [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
                 
@@ -477,24 +462,33 @@
         }else{
             [epubViewController loadSpine:IChap atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
             
-        }
+        }*/
         
         
     }
     
     else if (iTableLoad==TABLE_NOTES){
         
+        NSLog(@"Note is clicked");
+        
         dict=marrNotesData[indexPath.row];
         NSNumber *numPageIndex=[dict objectForKey:@"PageIndexInSpine"];
         NSString *strChapName=[dict objectForKey:@"chapterName"];
+        NSLog(@"pageIndex: %@ chapterName: %@", numPageIndex, strChapName);
         
         
-        NSString *str=[strChapName stringByReplacingOccurrencesOfString:@"Chapter" withString:@""];
+        //NSString *str=[strChapName stringByReplacingOccurrencesOfString:@"Chapter" withString:@""];
         
         int spineIndex=[self getIndexOfChapter:strChapName];
-        NSString *strHighLight=dict[@"notesText"];
+        NSLog(@"Chapter Index: %d", spineIndex);
+        NSString *strHighLight=[dict objectForKey:@"notesText"];
+        NSLog(@"The note is %@", strHighLight);
         
-        if (strHighLight) {
+        if(strHighLight) {
+            [epubViewController loadSpine:spineIndex atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
+        }
+        
+        /*if (strHighLight) {
             if (![strHighLight isKindOfClass:[NSNull class]]) {
                 [epubViewController loadSpine:spineIndex atPageIndex:[numPageIndex intValue] highlightSearchResult:dict[@"notesText"]];
                 
@@ -506,7 +500,7 @@
         }else{
             [epubViewController loadSpine:spineIndex atPageIndex:[numPageIndex intValue] highlightSearchResult:nil];
             
-        }
+        }*/
         
         
     }

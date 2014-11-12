@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString *m_strBookName;
 @property (nonatomic, strong) NSString *m_strAnchorNodeContent;
 @property (nonatomic, strong) NSString *m_strHighlighted;
+@property (nonatomic, strong) NSString *m_strPageIndexInSpine;
 -(void) setCenter:(CGPoint)point;
 @end

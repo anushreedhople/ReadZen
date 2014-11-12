@@ -205,6 +205,16 @@
                 NSLog(@"Going to create new Parse user");
                 [self createUser:emailid];
                 NSLog(@"Created new Parse user");
+                
+                /*Create a new row for Reading Metrics for this User*/
+                PFObject *readingMetric = [PFObject objectWithClassName:@"Metrics"];
+                readingMetric[@"userid"] = emailid;
+                readingMetric[@"pagesread"] = [[NSArray alloc]initWithObjects:@"0", @"0", @"0", nil];
+                readingMetric[@"minperpage"] = [[NSArray alloc]initWithObjects:@"0", @"0", @"0", nil];
+                readingMetric[@"completionpercent"] = [[NSArray alloc]initWithObjects:@"0", @"0", @"0", nil];
+                readingMetric[@"completionmin"] = [[NSArray alloc]initWithObjects:@"0", @"0", @"0", nil];
+                [readingMetric saveInBackground];
+                
             }
             
             

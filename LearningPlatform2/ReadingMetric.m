@@ -91,7 +91,7 @@
         completionpercent = [object valueForKey:@"completionpercent"];
         minperpage = [object valueForKey:@"minperpage"];
         pagesalreadyread = [object valueForKey:@"pagesread"];
-        
+       
         secspentreadingbook = secspentreadingbook + [[completionmin objectAtIndex:bookindex] integerValue];
         totalpagesread = pagesread + [[pagesalreadyread objectAtIndex:bookindex] integerValue];
         completedpercentage = totalpagesread/totalpages;

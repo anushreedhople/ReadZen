@@ -12,4 +12,5 @@
 - (void)highlightString:(NSString*)str withColor:(NSString *)color;
 - (NSString *)getHTML;
 - (NSInteger)highlightAllOccurencesOfStringInBlue:(NSString*)str ;
+- (NSInteger)highlightOccurencesOfAllStrings:(NSString*)str;
 @end

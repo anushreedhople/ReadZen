@@ -236,9 +236,9 @@ int buttonid=0;
     /*Set the book name*/
     [epubViewController setStrBookName:strBookname];
     /*Set the tag of the book*/
-    //[epubViewController setBookIndex:i];
+    [epubViewController setBookIndex:i];
     /*Set the weblink book source for copyright reasons*/
-    //[epubViewController loadBookSource:weblink];
+    [epubViewController loadBookSource:weblink];
     /*Open the book in Web View*/
     [epubViewController loadEpub:[NSURL fileURLWithPath:filePath]];
     
